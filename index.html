@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Dreams Photography</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card: #181818;
+    --border: #2a2a2a;
+    --muted: #555;
+    --text: #c8c8c0;
+    --light: #e8e6df;
+    --white: #f5f3ee;
+    --gold: #b8975a;
+    --gold-light: #d4b07a;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    display: flex; align-items:center; justify-content:space-between;
+    padding: 0 48px;
+    height: 72px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    cursor: pointer;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display:flex; gap:36px; align-items:center; }
+  .nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+  .nav-book {
+    background: var(--gold);
+    color: var(--black) !important;
+    padding: 8px 22px;
+    font-weight: 500;
+    transition: background 0.2s !important;
+  }
+  .nav-book:hover { background: var(--gold-light) !important; color: var(--black) !important; }
+
+  /* ── PAGES ── */
+  .page { display:none; padding-top: 72px; min-height: 100vh; }
+  .page.active { display:block; }
+
+  /* ════════════════════════
+     HOME PAGE
+  ════════════════════════ */
+  .hero {
+    position: relative;
+    height: calc(100vh - 72px);
+    display: flex; align-items:center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset:0;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a14 50%, #0d0d0a 100%);
+  }
+  /* Decorative grid overlay */
+  .hero-bg::before {
+    content:'';
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(184,151,90,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(184,151,90,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+  .hero-bg::after {
+    content:'';
+    position:absolute; right:0; top:0; bottom:0; width:55%;
+    background: linear-gradient(to right, #0a0a0a 0%, transparent 30%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='800'%3E%3Cdefs%3E%3CradialGradient id='a' cx='50%25' cy='40%25'%3E%3Cstop offset='0' stop-color='%23b8975a' stop-opacity='0.08'/%3E%3Cstop offset='100%25' stop-color='%230a0a0a' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='600' height='800'/%3E%3C/svg%3E") center/cover;
+  }
+  .hero-shapes {
+    position: absolute; right:8%; top:50%; transform:translateY(-50%);
+    width: 420px; height: 520px;
+  }
+  .hero-shapes .frame {
+    position:absolute;
+    border: 1px solid rgba(184,151,90,0.25);
+  }
+  .hero-shapes .frame-1 { inset:0; }
+  .hero-shapes .frame-2 { inset:20px; border-color: rgba(184,151,90,0.15); }
+  .hero-shapes .inner {
+    position:absolute;
+    inset:40px;
+    background: linear-gradient(160deg, #1e1e18 0%, #141410 100%);
+    display:flex; align-items:center; justify-content:center;
+    flex-direction:column; gap:16px;
+  }
+  .hero-shapes .lens {
+    width:120px; height:120px;
+    border-radius:50%;
+    border: 2px solid rgba(184,151,90,0.4);
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .hero-shapes .lens::before {
+    content:'';
+    position:absolute;
+    width:80px; height:80px;
+    border-radius:50%;
+    border: 1px solid rgba(184,151,90,0.25);
+  }
+  .hero-shapes .lens::after {
+    content:'';
+    position:absolute;
+    width:44px; height:44px;
+    border-radius:50%;
+    background: radial-gradient(circle, rgba(184,151,90,0.3), rgba(184,151,90,0.05));
+    border: 1px solid rgba(184,151,90,0.5);
+  }
+  .hero-shapes .sample-shots {
+    display:flex; gap:8px;
+  }
+  .hero-shapes .shot {
+    width:72px; height:90px;
+    background: linear-gradient(180deg, #2a2a22 0%, #1a1a14 100%);
+    border: 1px solid var(--border);
+    position:relative; overflow:hidden;
+  }
+  .shot-1 { background: linear-gradient(160deg, #1a2018 0%, #0e1210 100%) !important; }
+  .shot-2 { background: linear-gradient(160deg, #1e1c12 0%, #141208 100%) !important; }
+  .shot-3 { background: linear-gradient(160deg, #181820 0%, #10100e 100%) !important; }
+  .shot::after {
+    content:''; position:absolute; inset:0;
+    background: linear-gradient(to top, rgba(184,151,90,0.15), transparent 60%);
+  }
+  .hero-caption {
+    position:absolute; bottom:20px; right:10px;
+    font-size:10px; letter-spacing:0.1em; color: rgba(184,151,90,0.5);
+    text-transform:uppercase;
+  }
+
+  .hero-content {
+    position: relative; z-index:2;
+    padding: 0 80px;
+    max-width: 620px;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .hero-eyebrow::before {
+    content:''; width:40px; height:1px;
+    background: var(--gold); display:block;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 78px;
+    font-weight: 300;
+    line-height: 0.95;
+    color: var(--white);
+    margin-bottom: 28px;
+  }
+  .hero-title em { font-style:italic; color: var(--gold-light); }
+  .hero-sub {
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 44px;
+    max-width: 400px;
+    line-height: 1.8;
+  }
+  .hero-ctas { display:flex; gap:16px; align-items:center; }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--black);
+    padding: 14px 36px;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: none; cursor:pointer;
+    transition: background 0.2s;
+    text-decoration:none; display:inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-ghost {
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom:2px;
+    transition: border-color 0.2s;
+    cursor:pointer;
+  }
+  .btn-ghost:hover { border-color: var(--white); }
+  .hero-scroll {
+    position:absolute; bottom:32px; left:80px;
+    font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+    color: var(--muted); display:flex; align-items:center; gap:10px;
+  }
+  .hero-scroll::after { content:''; width:48px; height:1px; background:var(--muted); }
+
+  /* Featured section */
+  .section { padding: 96px 80px; }
+  .section-label {
+    font-size:11px; letter-spacing:0.2em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:14px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .section-label::before { content:''; width:32px; height:1px; background:var(--gold); }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px; font-weight:300;
+    color: var(--white); line-height:1.1;
+    margin-bottom: 48px;
+  }
+
+  .featured-grid {
+    display:grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-rows: 280px 280px;
+    gap: 2px;
+  }
+  .feat-item {
+    position:relative; overflow:hidden;
+    background: var(--card);
+    cursor:pointer;
+  }
+  .feat-item.tall { grid-row: span 2; }
+  .feat-bg {
+    position:absolute; inset:0;
+    transition: transform 0.6s ease;
+  }
+  .feat-item:hover .feat-bg { transform: scale(1.04); }
+  .feat-bg-1 { background: linear-gradient(160deg, #1a2515 0%, #0e1608 50%, #0a0f06 100%); }
+  .feat-bg-2 { background: linear-gradient(200deg, #151f28 0%, #0a1018 100%); }
+  .feat-bg-3 { background: linear-gradient(160deg, #201a10 0%, #120e06 100%); }
+  .feat-bg-4 { background: linear-gradient(200deg, #181820 0%, #0d0d14 100%); }
+
+  /* Simulated landscape scene */
+  .feat-bg-1::after {
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 80% 30% at 50% 70%, rgba(50,80,30,0.4), transparent),
+      radial-gradient(ellipse 60% 20% at 30% 80%, rgba(30,50,20,0.5), transparent),
+      linear-gradient(to bottom, rgba(20,40,60,0.6) 0%, rgba(10,20,10,0.2) 40%, rgba(20,35,15,0.8) 100%);
+  }
+  .feat-bg-2::after {
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 100% 40% at 50% 100%, rgba(30,60,90,0.5), transparent),
+      radial-gradient(circle at 70% 30%, rgba(184,151,90,0.12), transparent 60%),
+      linear-gradient(to bottom, rgba(10,20,40,0.7) 0%, rgba(20,40,70,0.3) 100%);
+  }
+  .feat-bg-3::after {
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 50% 30%, rgba(184,151,90,0.2), transparent 50%),
+      linear-gradient(to bottom, rgba(40,30,10,0.5), rgba(10,8,4,0.8));
+  }
+  .feat-bg-4::after {
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 120% 50% at 50% 50%, rgba(20,30,60,0.6), transparent),
+      linear-gradient(to bottom, rgba(5,10,25,0.8), rgba(15,15,30,0.4));
+  }
+  .feat-overlay {
+    position:absolute; inset:0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding: 24px;
+    opacity:0; transition: opacity 0.3s;
+  }
+  .feat-item:hover .feat-overlay { opacity:1; }
+  .feat-tag {
+    font-size:10px; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:6px;
+  }
+  .feat-name {
+    font-family:'Cormorant Garamond',serif;
+    font-size:22px; color:var(--white); font-weight:300;
+  }
+
+  /* Stats */
+  .stats-row {
+    display:grid; grid-template-columns: repeat(4,1fr);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin: 0 80px;
+  }
+  .stat-item {
+    padding: 40px 32px;
+    border-right: 1px solid var(--border);
+    text-align:center;
+  }
+  .stat-item:last-child { border-right:none; }
+  .stat-num {
+    font-family:'Cormorant Garamond',serif;
+    font-size:52px; font-weight:300;
+    color:var(--white); line-height:1;
+    margin-bottom:8px;
+  }
+  .stat-num span { font-size:28px; color:var(--gold); }
+  .stat-label { font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); }
+
+  /* ════════════════════════
+     GALLERY PAGE
+  ════════════════════════ */
+  .gallery-hero {
+    height: 340px;
+    background: linear-gradient(160deg, #111108 0%, #0a0f06 100%);
+    display:flex; align-items:flex-end;
+    padding: 0 80px 48px;
+    position:relative; overflow:hidden;
+  }
+  .gallery-hero::before {
+    content:'';
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(30,50,20,0.35), transparent),
+      radial-gradient(circle at 20% 80%, rgba(184,151,90,0.08), transparent 40%);
+  }
+  .page-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size:64px; font-weight:300;
+    color:var(--white); line-height:1;
+    position:relative; z-index:1;
+  }
+  .page-title em { font-style:italic; color:var(--gold-light); }
+
+  .gallery-filters {
+    display:flex; gap:0; border-bottom:1px solid var(--border);
+    padding: 0 80px;
+    overflow-x:auto;
+  }
+  .filter-btn {
+    padding:18px 28px;
+    font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--muted); background:none; border:none; cursor:pointer;
+    border-bottom:2px solid transparent; margin-bottom:-1px;
+    transition: color 0.2s, border-color 0.2s;
+    white-space:nowrap;
+  }
+  .filter-btn:hover { color:var(--white); }
+  .filter-btn.active { color:var(--gold); border-bottom-color:var(--gold); }
+
+  .gallery-masonry {
+    padding: 48px 80px;
+    columns: 3;
+    column-gap: 3px;
+  }
+  .gallery-item {
+    break-inside:avoid;
+    margin-bottom:3px;
+    position:relative; overflow:hidden;
+    cursor:pointer;
+  }
+  .gallery-item .g-img {
+    width:100%; display:block;
+    transition: transform 0.5s ease;
+  }
+  .gallery-item:hover .g-img { transform:scale(1.04); }
+  .g-img {
+    background: var(--card);
+    border: 1px solid var(--border);
+  }
+  .g-img.tall { height:340px; }
+  .g-img.short { height:200px; }
+  .g-img.med { height:260px; }
+
+  /* Simulated landscape images using CSS gradients */
+  .g1 { background: linear-gradient(160deg, #1a2515 0%, #0e1608 40%, #0d1a0a 100%);
+    position:relative; }
+  .g1::after { content:''; position:absolute; inset:0;
+    background: radial-gradient(ellipse 100% 40% at 50% 75%, rgba(40,70,25,0.5),transparent),
+    radial-gradient(circle at 30% 30%, rgba(184,151,90,0.15), transparent 40%); }
+  .g2 { background: linear-gradient(180deg, #0d1825 0%, #0a1018 50%, #151f28 100%);
+    position:relative; }
+  .g2::after { content:''; position:absolute; inset:0;
+    background: radial-gradient(ellipse 120% 30% at 50% 95%, rgba(20,50,90,0.6),transparent),
+    radial-gradient(circle at 70% 20%, rgba(184,151,90,0.18), transparent 35%); }
+  .g3 { background: linear-gradient(200deg, #201a0a 0%, #120e05 100%);
+    position:relative; }
+  .g3::after { content:''; position:absolute; inset:0;
+    background: radial-gradient(circle at 50% 35%, rgba(184,151,90,0.25), transparent 50%),
+    radial-gradient(ellipse 80% 30% at 50% 90%, rgba(60,45,20,0.4), transparent); }
+  .g4 { background: linear-gradient(160deg, #181820 0%, #0d0d18 100%);
+    position:relative; }
+  .g4::after { content:''; position:absolute; inset:0;
+    background: radial-gradient(circle at 50% 40%, rgba(100,120,200,0.12), transparent 55%),
+    linear-gradient(to bottom, rgba(5,5,20,0.5), rgba(20,20,40,0.3)); }
+  .g5 { background: linear-gradient(180deg, #0f1a10 0%, #0a120a 100%);
+    position:relative; }
+  .g5::after { content:''; position:absolute; inset:0;
+    background: radial-gradient(ellipse 80% 50% at 40% 60%, rgba(30,60,25,0.5), transparent),
+    radial-gradient(circle at 80% 20%, rgba(184,151,90,0.1), transparent 40%); }
+  .g6 { background: linear-gradient(160deg, #1a1208 0%, #100c05 100%);
+    position:relative; }
+  .g6::after { content:''; position:absolute; inset:0;
+    background: radial-gradient(circle at 40% 40%, rgba(184,151,90,0.2), transparent 45%),
+    linear-gradient(to bottom, rgba(30,20,10,0.3), rgba(10,8,4,0.6)); }
+  .g7 { background: linear-gradient(200deg, #0a1520 0%, #080f18 100%);
+    position:relative; }
+  .g7::after { content:''; position:absolute; inset:0;
+    background: radial-gradient(ellipse 120% 40% at 50% 80%, rgba(15,40,80,0.5),transparent),
+    radial-gradient(circle at 60% 25%, rgba(200,180,100,0.1), transparent 40%); }
+  .g8 { background: linear-gradient(160deg, #141a0e 0%, #0c1008 100%);
+    position:relative; }
+  .g8::after { content:''; position:absolute; inset:0;
+    background: radial-gradient(ellipse 100% 35% at 50% 70%, rgba(35,65,20,0.45),transparent),
+    radial-gradient(circle at 25% 35%, rgba(184,151,90,0.12), transparent 40%); }
+  .g9 { background: linear-gradient(180deg, #1c1408 0%, #100c05 100%);
+    position:relative; }
+  .g9::after { content:''; position:absolute; inset:0;
+    background: radial-gradient(circle at 50% 30%, rgba(220,170,80,0.2), transparent 45%),
+    linear-gradient(to bottom, rgba(40,30,10,0.4), rgba(10,8,4,0.5)); }
+
+  .gallery-item:hover .g-img::before {
+    content:''; position:absolute; inset:0;
+    background: rgba(0,0,0,0.3); z-index:1;
+  }
+  .g-label {
+    position:absolute; bottom:0; left:0; right:0;
+    padding:20px 18px 16px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    opacity:0; transition:opacity 0.3s;
+    z-index:2;
+  }
+  .gallery-item:hover .g-label { opacity:1; }
+  .g-label-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size:18px; color:var(--white); display:block;
+  }
+  .g-label-loc {
+    font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold);
+  }
+
+  /* ════════════════════════
+     SERVICES PAGE
+  ════════════════════════ */
+  .services-hero {
+    height:320px;
+    background: linear-gradient(160deg, #0d100a 0%, #0a0a08 100%);
+    display:flex; align-items:flex-end;
+    padding: 0 80px 48px; position:relative; overflow:hidden;
+  }
+  .services-hero::before {
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 80% 40%, rgba(184,151,90,0.1), transparent 50%),
+      radial-gradient(ellipse 100% 60% at 30% 80%, rgba(20,35,15,0.4), transparent);
+  }
+  .services-grid {
+    display:grid; grid-template-columns: repeat(3, 1fr);
+    gap:1px; background:var(--border);
+    margin:0;
+  }
+  .service-card {
+    background:var(--dark);
+    padding: 48px 40px;
+    position:relative; overflow:hidden;
+    transition: background 0.3s;
+  }
+  .service-card:hover { background: var(--card); }
+  .service-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:2px;
+    background: var(--gold); transform:scaleX(0); transform-origin:left;
+    transition: transform 0.4s ease;
+  }
+  .service-card:hover::before { transform:scaleX(1); }
+  .service-num {
+    font-family:'Cormorant Garamond',serif;
+    font-size:60px; font-weight:300;
+    color:rgba(184,151,90,0.12); line-height:1;
+    margin-bottom:16px;
+  }
+  .service-name {
+    font-family:'Cormorant Garamond',serif;
+    font-size:28px; font-weight:400;
+    color:var(--white); margin-bottom:14px;
+  }
+  .service-desc {
+    font-size:13.5px; color:var(--text); line-height:1.75;
+    margin-bottom:24px;
+  }
+  .service-price {
+    font-family:'Cormorant Garamond',serif;
+    font-size:32px; color:var(--gold); font-weight:300;
+    margin-bottom:8px;
+  }
+  .service-includes {
+    font-size:11px; letter-spacing:0.12em; color:var(--muted);
+    text-transform:uppercase; margin-bottom:28px;
+  }
+  .service-list { list-style:none; margin-bottom:32px; }
+  .service-list li {
+    font-size:13px; color:var(--text);
+    padding: 7px 0;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    display:flex; align-items:center; gap:10px;
+  }
+  .service-list li::before {
+    content:''; width:16px; height:1px; background:var(--gold); flex-shrink:0;
+  }
+  .btn-outline {
+    display:inline-block;
+    border:1px solid var(--gold);
+    color:var(--gold);
+    padding: 11px 28px;
+    font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+    text-decoration:none; cursor:pointer;
+    transition: background 0.2s, color 0.2s;
+    background:none;
+  }
+  .btn-outline:hover { background:var(--gold); color:var(--black); }
+
+  .add-ons { padding:80px; }
+  .add-ons-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size:40px; color:var(--white); font-weight:300;
+    margin-bottom:40px;
+  }
+  .add-on-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); }
+  .add-on {
+    background:var(--dark); padding:28px 24px;
+  }
+  .add-on-name { font-size:14px; color:var(--white); margin-bottom:6px; }
+  .add-on-price { font-family:'Cormorant Garamond',serif; font-size:24px; color:var(--gold); }
+
+  /* ════════════════════════
+     ABOUT PAGE
+  ════════════════════════ */
+  .about-layout {
+    display:grid; grid-template-columns:1fr 1fr;
+    min-height: calc(100vh - 72px);
+  }
+  .about-image-side {
+    position:relative; overflow:hidden;
+    background: linear-gradient(160deg, #141a10 0%, #0e1208 50%, #0d100a 100%);
+  }
+  .about-image-side::before {
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 80% 60% at 40% 60%, rgba(25,45,18,0.5), transparent),
+      radial-gradient(circle at 70% 20%, rgba(184,151,90,0.1), transparent 50%);
+  }
+  .about-portrait-frame {
+    position:absolute; inset:60px;
+    border:1px solid rgba(184,151,90,0.2);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .about-portrait-frame::before {
+    content:''; position:absolute; inset:16px;
+    border:1px solid rgba(184,151,90,0.1);
+  }
+  .portrait-placeholder {
+    text-align:center;
+  }
+  .portrait-circle {
+    width:160px; height:160px; border-radius:50%;
+    background: radial-gradient(circle, rgba(184,151,90,0.2), rgba(184,151,90,0.05));
+    border:1px solid rgba(184,151,90,0.35);
+    margin:0 auto 20px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .portrait-icon {
+    font-size:64px; opacity:0.4;
+  }
+  .portrait-name {
+    font-family:'Cormorant Garamond',serif;
+    font-size:28px; color:var(--white); font-weight:300;
+  }
+  .portrait-title-text {
+    font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold);
+  }
+
+  .about-content {
+    padding: 80px 72px;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .about-quote {
+    font-family:'Cormorant Garamond',serif;
+    font-size:38px; font-weight:300; font-style:italic;
+    color:var(--white); line-height:1.3;
+    margin-bottom:36px;
+  }
+  .about-quote em { color:var(--gold-light); font-style:normal; }
+  .about-body { font-size:14px; color:var(--text); line-height:1.85; margin-bottom:32px; }
+  .about-credentials {
+    display:grid; grid-template-columns:1fr 1fr; gap:1px;
+    background:var(--border); border:1px solid var(--border);
+    margin-top:40px;
+  }
+  .credential { background:var(--dark); padding:20px; }
+  .cred-label { font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
+  .cred-val { font-size:14px; color:var(--white); }
+
+  /* ════════════════════════
+     BOOKING PAGE
+  ════════════════════════ */
+  .booking-layout {
+    display:grid; grid-template-columns: 1.1fr 0.9fr;
+    gap:0;
+    min-height: calc(100vh - 72px);
+  }
+  .booking-info {
+    background:var(--dark);
+    padding:72px 64px;
+    border-right:1px solid var(--border);
+  }
+  .booking-info-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size:48px; font-weight:300; color:var(--white);
+    margin-bottom:14px; line-height:1.1;
+  }
+  .booking-info-sub { font-size:14px; color:var(--text); margin-bottom:48px; }
+  .session-types { display:flex; flex-direction:column; gap:3px; }
+  .session-type {
+    padding:22px 24px;
+    background:var(--card);
+    border-left:2px solid transparent;
+    cursor:pointer;
+    transition: border-color 0.2s, background 0.2s;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .session-type:hover { border-left-color:var(--gold); background:#1e1e1e; }
+  .session-type.selected { border-left-color:var(--gold); background:#1e1e1e; }
+  .st-name { font-size:15px; color:var(--white); margin-bottom:4px; }
+  .st-desc { font-size:12px; color:var(--muted); }
+  .st-price { font-family:'Cormorant Garamond',serif; font-size:24px; color:var(--gold); }
+
+  .booking-form-side {
+    padding:72px 56px;
+    background:var(--black);
+  }
+  .form-title {
+    font-size:12px; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:36px;
+  }
+  .form-group { margin-bottom:22px; }
+  .form-label {
+    display:block; font-size:11px; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:8px;
+  }
+  .form-input {
+    width:100%; background:var(--dark);
+    border:1px solid var(--border);
+    color:var(--white); padding:13px 16px;
+    font-family:'Jost',sans-serif; font-size:14px; font-weight:300;
+    outline:none; transition: border-color 0.2s;
+  }
+  .form-input:focus { border-color:var(--gold); }
+  .form-input::placeholder { color:var(--muted); }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .form-select {
+    width:100%; background:var(--dark);
+    border:1px solid var(--border);
+    color:var(--white); padding:13px 16px;
+    font-family:'Jost',sans-serif; font-size:14px;
+    outline:none; appearance:none; cursor:pointer;
+  }
+  .calendar-mini {
+    background:var(--card); border:1px solid var(--border);
+    padding:20px; margin-bottom:24px;
+  }
+  .cal-header {
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:16px;
+  }
+  .cal-month { font-size:13px; color:var(--white); letter-spacing:0.08em; }
+  .cal-nav { background:none; border:none; color:var(--muted); cursor:pointer; font-size:16px; }
+  .cal-days {
+    display:grid; grid-template-columns:repeat(7,1fr);
+    gap:2px; text-align:center;
+  }
+  .cal-day-label { font-size:10px; letter-spacing:0.1em; color:var(--muted); padding:4px 0; }
+  .cal-day {
+    font-size:12px; color:var(--text); padding:7px 4px;
+    cursor:pointer; transition: background 0.15s, color 0.15s;
+  }
+  .cal-day:hover { background:var(--border); color:var(--white); }
+  .cal-day.available { color:var(--white); }
+  .cal-day.booked { color:var(--muted); text-decoration:line-through; cursor:default; }
+  .cal-day.selected { background:var(--gold); color:var(--black); }
+  .cal-day.today { color:var(--gold); font-weight:500; }
+
+  /* ════════════════════════
+     CONTACT PAGE
+  ════════════════════════ */
+  .contact-layout {
+    display:grid; grid-template-columns:1fr 1fr;
+    min-height:calc(100vh - 72px);
+  }
+  .contact-info-side {
+    background:var(--dark); padding:80px 72px;
+    border-right:1px solid var(--border);
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .contact-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size:56px; font-weight:300; color:var(--white); line-height:1;
+    margin-bottom:20px;
+  }
+  .contact-title em { font-style:italic; color:var(--gold-light); }
+  .contact-sub { font-size:14px; color:var(--text); margin-bottom:56px; max-width:380px; line-height:1.8; }
+  .contact-items { display:flex; flex-direction:column; gap:0; }
+  .contact-item {
+    padding:24px 0;
+    border-bottom:1px solid var(--border);
+    display:flex; align-items:flex-start; gap:20px;
+  }
+  .contact-icon {
+    width:40px; height:40px; flex-shrink:0;
+    border:1px solid rgba(184,151,90,0.3);
+    display:flex; align-items:center; justify-content:center;
+    font-size:16px; color:var(--gold);
+  }
+  .contact-item-label { font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
+  .contact-item-val { font-size:14px; color:var(--white); }
+
+  .contact-form-side { padding:80px 72px; }
+  .contact-form-title {
+    font-size:12px; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:36px;
+  }
+  textarea.form-input { resize:vertical; min-height:120px; }
+  .submit-btn {
+    width:100%; padding:16px;
+    background:var(--gold); color:var(--black);
+    border:none; cursor:pointer;
+    font-family:'Jost',sans-serif; font-size:12px;
+    font-weight:500; letter-spacing:0.16em; text-transform:uppercase;
+    transition: background 0.2s; margin-top:8px;
+  }
+  .submit-btn:hover { background:var(--gold-light); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top:1px solid var(--border);
+    padding:48px 80px;
+    display:flex; justify-content:space-between; align-items:center;
+    background:var(--dark);
+  }
+  .footer-logo {
+    font-family:'Cormorant Garamond',serif;
+    font-size:20px; color:var(--white);
+  }
+  .footer-logo span { color:var(--gold); }
+  .footer-copy { font-size:12px; color:var(--muted); }
+  .footer-links { display:flex; gap:28px; }
+  .footer-links a {
+    font-size:11px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--muted); text-decoration:none; cursor:pointer;
+    transition:color 0.2s;
+  }
+  .footer-links a:hover { color:var(--white); }
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">Digital <span>Dreams</span></div>
+  <div class="nav-links">
+    <a onclick="showPage('home')" id="nav-home" class="active">Home</a>
+    <a onclick="showPage('gallery')" id="nav-gallery">Gallery</a>
+    <a onclick="showPage('services')" id="nav-services">Services</a>
+    <a onclick="showPage('about')" id="nav-about">About</a>
+    <a onclick="showPage('contact')" id="nav-contact">Contact</a>
+    <a onclick="showPage('booking')" class="nav-book">Book a Session</a>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════
+     HOME PAGE
+════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-shapes">
+      <div class="frame frame-1"></div>
+      <div class="frame frame-2"></div>
+      <div class="inner">
+        <div class="lens"></div>
+        <div class="sample-shots">
+          <div class="shot shot-1"></div>
+          <div class="shot shot-2"></div>
+          <div class="shot shot-3"></div>
+        </div>
+        <div class="hero-caption">Digital Dreams Photography</div>
+      </div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Nature & Landscape Photography</div>
+      <h1 class="hero-title">Where <em>Light</em><br>Meets<br>Wilderness</h1>
+      <p class="hero-sub">Award-winning landscape and nature photography. From misty mountain peaks to golden hour coastlines — every frame tells a story.</p>
+      <div class="hero-ctas">
+        <button class="btn-primary" onclick="showPage('gallery')">View Portfolio</button>
+        <a class="btn-ghost" onclick="showPage('booking')">Book a Session</a>
+      </div>
+    </div>
+    <div class="hero-scroll">Scroll to explore</div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">Featured Work</div>
+    <h2 class="section-title">Recent Collections</h2>
+    <div class="featured-grid">
+      <div class="feat-item tall">
+        <div class="feat-bg feat-bg-1"></div>
+        <div class="feat-overlay">
+          <div class="feat-tag">Landscape</div>
+          <div class="feat-name">Pacific Crest Trail</div>
+        </div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-bg feat-bg-2"></div>
+        <div class="feat-overlay">
+          <div class="feat-tag">Seascape</div>
+          <div class="feat-name">Olympic Coast</div>
+        </div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-bg feat-bg-3"></div>
+        <div class="feat-overlay">
+          <div class="feat-tag">Golden Hour</div>
+          <div class="feat-name">Desert Bloom</div>
+        </div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-bg feat-bg-4"></div>
+        <div class="feat-overlay">
+          <div class="feat-tag">Night Sky</div>
+          <div class="feat-name">Milky Way, Wyoming</div>
+        </div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-bg feat-bg-1" style="filter:hue-rotate(30deg)"></div>
+        <div class="feat-overlay">
+          <div class="feat-tag">Forest</div>
+          <div class="feat-name">Ancient Redwoods</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-row">
+    <div class="stat-item">
+      <div class="stat-num">12<span>+</span></div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Session Types</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">340<span>+</span></div>
+      <div class="stat-label">Happy Clients</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">8<span>x</span></div>
+      <div class="stat-label">Award Winner</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Digital <span>Dreams</span></div>
+    <div class="footer-copy">© 2026 Digital Dreams Photography. All rights reserved.</div>
+    <div class="footer-links">
+      <a onclick="showPage('gallery')">Gallery</a>
+      <a onclick="showPage('services')">Services</a>
+      <a onclick="showPage('booking')">Book</a>
+      <a onclick="showPage('contact')">Contact</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ════════════════════════════════
+     GALLERY PAGE
+════════════════════════════════ -->
+<div class="page" id="page-gallery">
+  <div class="gallery-hero">
+    <h1 class="page-title">The <em>Gallery</em></h1>
+  </div>
+  <div class="gallery-filters">
+    <button class="filter-btn active">All Work</button>
+    <button class="filter-btn">Landscape</button>
+    <button class="filter-btn">Seascape</button>
+    <button class="filter-btn">Night Sky</button>
+    <button class="filter-btn">Wildlife</button>
+    <button class="filter-btn">Golden Hour</button>
+  </div>
+  <div class="gallery-masonry">
+    <div class="gallery-item">
+      <div class="g-img tall g1">
+        <div class="g-label">
+          <span class="g-label-title">Morning Mist, Cascades</span>
+          <span class="g-label-loc">Washington State</span>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="g-img short g2">
+        <div class="g-label">
+          <span class="g-label-title">Moonrise Over Pacific</span>
+          <span class="g-label-loc">Oregon Coast</span>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="g-img med g3">
+        <div class="g-label">
+          <span class="g-label-title">Desert Sunset</span>
+          <span class="g-label-loc">Moab, Utah</span>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="g-img med g4">
+        <div class="g-label">
+          <span class="g-label-title">Milky Way Arch</span>
+          <span class="g-label-loc">Wyoming</span>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="g-img short g5">
+        <div class="g-label">
+          <span class="g-label-title">Redwood Canopy</span>
+          <span class="g-label-loc">Northern California</span>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="g-img tall g6">
+        <div class="g-label">
+          <span class="g-label-title">Golden Hour, Antelope</span>
+          <span class="g-label-loc">Arizona</span>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="g-img short g7">
+        <div class="g-label">
+          <span class="g-label-title">Tidal Pool Reflections</span>
+          <span class="g-label-loc">Big Sur, CA</span>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="g-img med g8">
+        <div class="g-label">
+          <span class="g-label-title">Alpine Lake</span>
+          <span class="g-label-loc">Rocky Mountains, CO</span>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="g-img short g9">
+        <div class="g-label">
+          <span class="g-label-title">Autumn Forest</span>
+          <span class="g-label-loc">Vermont</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-logo">Digital <span>Dreams</span></div>
+    <div class="footer-copy">© 2026 Digital Dreams Photography. All rights reserved.</div>
+    <div class="footer-links">
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('services')">Services</a>
+      <a onclick="showPage('booking')">Book</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ════════════════════════════════
+     SERVICES PAGE
+════════════════════════════════ -->
+<div class="page" id="page-services">
+  <div class="services-hero">
+    <h1 class="page-title">Session <em>Types</em></h1>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-name">Landscape Half-Day</div>
+      <div class="service-desc">A focused 4-hour session at a single location of your choosing. Perfect for golden hour or sunrise shoots in the field.</div>
+      <div class="service-price">$450</div>
+      <div class="service-includes">What's included</div>
+      <ul class="service-list">
+        <li>4-hour shoot</li>
+        <li>30 edited digital files</li>
+        <li>Online gallery delivery</li>
+        <li>Print-ready resolution</li>
+      </ul>
+      <button class="btn-outline" onclick="showPage('booking')">Book This Session</button>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-name">Landscape Full Day</div>
+      <div class="service-desc">An immersive 8-hour field session across multiple locations. Sunrise to golden hour, or custom timing based on your vision.</div>
+      <div class="service-price">$850</div>
+      <div class="service-includes">What's included</div>
+      <ul class="service-list">
+        <li>8-hour shoot</li>
+        <li>75 edited digital files</li>
+        <li>Online gallery delivery</li>
+        <li>2 large print credits</li>
+      </ul>
+      <button class="btn-outline" onclick="showPage('booking')">Book This Session</button>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-name">Night Sky & Astro</div>
+      <div class="service-desc">A specialized session for astrophotography. We scout low-light locations and shoot from dusk through deep night for stunning Milky Way images.</div>
+      <div class="service-price">$620</div>
+      <div class="service-includes">What's included</div>
+      <ul class="service-list">
+        <li>6-hour night session</li>
+        <li>40 edited files</li>
+        <li>Location scouting</li>
+        <li>Moon phase planning</li>
+      </ul>
+      <button class="btn-outline" onclick="showPage('booking')">Book This Session</button>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-name">Wildlife Session</div>
+      <div class="service-desc">Patient and skilled wildlife photography in natural habitats. Requires advance planning and location coordination.</div>
+      <div class="service-price">$720</div>
+      <div class="service-includes">What's included</div>
+      <ul class="service-list">
+        <li>Full day field time</li>
+        <li>50 edited digital files</li>
+        <li>Habitat research</li>
+        <li>Species identification notes</li>
+      </ul>
+      <button class="btn-outline" onclick="showPage('booking')">Book This Session</button>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-name">Multi-Day Expedition</div>
+      <div class="service-desc">A custom 2–5 day trip to remote or destination locations. Ideal for editorial clients, brands, or serious collectors.</div>
+      <div class="service-price">From $2,400</div>
+      <div class="service-includes">What's included</div>
+      <ul class="service-list">
+        <li>Multi-day coverage</li>
+        <li>200+ edited files</li>
+        <li>Full trip planning</li>
+        <li>Licensed usage rights</li>
+      </ul>
+      <button class="btn-outline" onclick="showPage('booking')">Inquire</button>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-name">Print Fulfillment</div>
+      <div class="service-desc">Museum-quality fine art prints available in a range of sizes and substrates — canvas, metal, or archival paper.</div>
+      <div class="service-price">From $120</div>
+      <div class="service-includes">Options available</div>
+      <ul class="service-list">
+        <li>Archival paper prints</li>
+        <li>Metal / aluminum face</li>
+        <li>Canvas wraps</li>
+        <li>Custom framing</li>
+      </ul>
+      <button class="btn-outline" onclick="showPage('contact')">Request a Quote</button>
+    </div>
+  </div>
+
+  <div class="add-ons">
+    <div class="section-label">Extras</div>
+    <h3 class="add-ons-title">Add-Ons</h3>
+    <div class="add-on-grid">
+      <div class="add-on"><div class="add-on-name">Rush Delivery (48h)</div><div class="add-on-price">+$150</div></div>
+      <div class="add-on"><div class="add-on-name">Extended Licensing</div><div class="add-on-price">+$250</div></div>
+      <div class="add-on"><div class="add-on-name">Behind-the-Scenes Video</div><div class="add-on-price">+$200</div></div>
+      <div class="add-on"><div class="add-on-name">Drone Footage</div><div class="add-on-price">+$180</div></div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-logo">Digital <span>Dreams</span></div>
+    <div class="footer-copy">© 2026 Digital Dreams Photography.</div>
+    <div class="footer-links">
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('gallery')">Gallery</a>
+      <a onclick="showPage('booking')">Book</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ════════════════════════════════
+     ABOUT PAGE
+════════════════════════════════ -->
+<div class="page" id="page-about">
+  <div class="about-layout">
+    <div class="about-image-side">
+      <div class="about-portrait-frame">
+        <div class="portrait-placeholder">
+          <div class="portrait-circle">
+            <div class="portrait-icon">◉</div>
+          </div>
+          <div class="portrait-name">Alex Rivera</div>
+          <div class="portrait-title-text">Lead Photographer</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-content">
+      <div class="section-label">Our Story</div>
+      <blockquote class="about-quote">"I don't capture landscapes.<br>I capture <em>moments</em> within them."</blockquote>
+      <p class="about-body">Digital Dreams Photography was founded on a simple belief: that the natural world contains more beauty than we ever slow down enough to see. For over 12 years, we've been chasing light across mountain ranges, coastlines, deserts, and forests — bringing those moments back to you in print-quality detail.</p>
+      <p class="about-body">Every session is approached with patience, preparation, and a deep respect for the environment. We scout locations weeks in advance, study weather patterns, and show up before sunrise so you don't have to.</p>
+      <div class="about-credentials">
+        <div class="credential">
+          <div class="cred-label">Based In</div>
+          <div class="cred-val">Pacific Northwest, USA</div>
+        </div>
+        <div class="credential">
+          <div class="cred-label">Experience</div>
+          <div class="cred-val">12+ Years</div>
+        </div>
+        <div class="credential">
+          <div class="cred-label">Equipment</div>
+          <div class="cred-val">Sony Alpha System</div>
+        </div>
+        <div class="credential">
+          <div class="cred-label">Recognition</div>
+          <div class="cred-val">8x National Award Winner</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-logo">Digital <span>Dreams</span></div>
+    <div class="footer-copy">© 2026 Digital Dreams Photography.</div>
+    <div class="footer-links">
+      <a onclick="showPage('gallery')">Gallery</a>
+      <a onclick="showPage('services')">Services</a>
+      <a onclick="showPage('booking')">Book</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ════════════════════════════════
+     BOOKING PAGE
+════════════════════════════════ -->
+<div class="page" id="page-booking">
+  <div class="booking-layout">
+    <div class="booking-info">
+      <div class="section-label">Reserve Your Session</div>
+      <h2 class="booking-info-title">Book a Session</h2>
+      <p class="booking-info-sub">Select a session type below, choose your date, and complete the form to reserve your spot.</p>
+      <div class="session-types">
+        <div class="session-type selected">
+          <div><div class="st-name">Landscape Half-Day</div><div class="st-desc">4 hours · 30 edited files</div></div>
+          <div class="st-price">$450</div>
+        </div>
+        <div class="session-type">
+          <div><div class="st-name">Landscape Full Day</div><div class="st-desc">8 hours · 75 edited files</div></div>
+          <div class="st-price">$850</div>
+        </div>
+        <div class="session-type">
+          <div><div class="st-name">Night Sky & Astro</div><div class="st-desc">6 hours · 40 edited files</div></div>
+          <div class="st-price">$620</div>
+        </div>
+        <div class="session-type">
+          <div><div class="st-name">Wildlife Session</div><div class="st-desc">Full day · 50 edited files</div></div>
+          <div class="st-price">$720</div>
+        </div>
+        <div class="session-type">
+          <div><div class="st-name">Multi-Day Expedition</div><div class="st-desc">2–5 days · 200+ files</div></div>
+          <div class="st-price">From $2,400</div>
+        </div>
+      </div>
+    </div>
+    <div class="booking-form-side">
+      <div class="form-title">Complete Your Booking</div>
+      <div class="calendar-mini">
+        <div class="cal-header">
+          <button class="cal-nav">‹</button>
+          <span class="cal-month">April 2026</span>
+          <button class="cal-nav">›</button>
+        </div>
+        <div class="cal-days">
+          <div class="cal-day-label">Su</div><div class="cal-day-label">Mo</div>
+          <div class="cal-day-label">Tu</div><div class="cal-day-label">We</div>
+          <div class="cal-day-label">Th</div><div class="cal-day-label">Fr</div>
+          <div class="cal-day-label">Sa</div>
+          <div class="cal-day"></div><div class="cal-day"></div>
+          <div class="cal-day"></div><div class="cal-day available">1</div>
+          <div class="cal-day available">2</div><div class="cal-day booked">3</div>
+          <div class="cal-day available">4</div>
+          <div class="cal-day available">5</div><div class="cal-day available">6</div>
+          <div class="cal-day available">7</div><div class="cal-day booked">8</div>
+          <div class="cal-day available">9</div><div class="cal-day available">10</div>
+          <div class="cal-day available selected">11</div>
+          <div class="cal-day available">12</div><div class="cal-day available">13</div>
+          <div class="cal-day booked">14</div><div class="cal-day available">15</div>
+          <div class="cal-day available">16</div><div class="cal-day available">17</div>
+          <div class="cal-day available">18</div>
+        </div>
+      </div>
+      <div class="form-group form-row">
+        <div><label class="form-label">First Name</label><input class="form-input" type="text" placeholder="Jane"></div>
+        <div><label class="form-label">Last Name</label><input class="form-input" type="text" placeholder="Smith"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input class="form-input" type="email" placeholder="jane@example.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Preferred Location</label>
+        <input class="form-input" type="text" placeholder="e.g. Mount Rainier, OR Coast...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Notes (optional)</label>
+        <input class="form-input" type="text" placeholder="Any special requests or questions">
+      </div>
+      <button class="btn-primary" style="width:100%;padding:15px;font-size:12px;letter-spacing:0.14em;">Confirm Booking — $450 Deposit</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     CONTACT PAGE
+════════════════════════════════ -->
+<div class="page" id="page-contact">
+  <div class="contact-layout">
+    <div class="contact-info-side">
+      <div class="section-label">Get in Touch</div>
+      <h2 class="contact-title">Let's Talk<br><em>Photography</em></h2>
+      <p class="contact-sub">Have a vision? A location in mind? Or just want to know more about what we do? We'd love to hear from you.</p>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-icon">✉</div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-val">hello@digitaldreamsphoto.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">☏</div>
+          <div>
+            <div class="contact-item-label">Phone</div>
+            <div class="contact-item-val">(503) 555-0142</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">◎</div>
+          <div>
+            <div class="contact-item-label">Studio</div>
+            <div class="contact-item-val">Portland, Oregon · Pacific Northwest</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">◷</div>
+          <div>
+            <div class="contact-item-label">Response Time</div>
+            <div class="contact-item-val">Within 24 hours, Mon–Fri</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form-side">
+      <div class="contact-form-title">Send a Message</div>
+      <div class="form-group form-row">
+        <div><label class="form-label">First Name</label><input class="form-input" type="text" placeholder="Jane"></div>
+        <div><label class="form-label">Last Name</label><input class="form-input" type="text" placeholder="Smith"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input class="form-input" type="email" placeholder="jane@example.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Subject</label>
+        <select class="form-select form-input">
+          <option value="">Select a topic…</option>
+          <option>Session Inquiry</option>
+          <option>Print Purchase</option>
+          <option>Licensing</option>
+          <option>General Question</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-input" placeholder="Tell us about your project, location ideas, or any questions you have…"></textarea>
+      </div>
+      <button class="submit-btn">Send Message</button>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-logo">Digital <span>Dreams</span></div>
+    <div class="footer-copy">© 2026 Digital Dreams Photography.</div>
+    <div class="footer-links">
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('gallery')">Gallery</a>
+      <a onclick="showPage('booking')">Book</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  const navEl = document.getElementById('nav-' + name);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+document.querySelectorAll('.session-type').forEach(st => {
+  st.addEventListener('click', () => {
+    document.querySelectorAll('.session-type').forEach(s => s.classList.remove('selected'));
+    st.classList.add('selected');
+  });
+});
+</script>
+</body>
+</html>
