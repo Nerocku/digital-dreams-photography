@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!-- Digital Dreams Photography - Booking Page
+     Created by Dominique Winkleman for IT299 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Session | Digital Dreams Photography</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo"><a href="index.html">Digital <span>Dreams</span></a></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="services.html">Services</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="booking.html" class="book-btn">Book a Session</a>
+        </div>
+    </nav>
+
+    <!-- Booking Layout -->
+    <div class="booking-layout">
+
+        <!-- Left - Session Selection -->
+        <div class="booking-left">
+            <p class="section-tag">Reserve Your Session</p>
+            <h2>Book a Session</h2>
+            <p>Pick a session type, choose a date, and fill out the form. A deposit is required to hold your spot.</p>
+
+            <div class="session-list">
+                <div class="session selected" data-price="350">
+                    <div>
+                        <p class="session-name">Dream Portrait</p>
+                        <p class="session-info">2 hours · 20 edited files</p>
+                    </div>
+                    <span class="session-price">$350</span>
+                </div>
+                <div class="session" data-price="650">
+                    <div>
+                        <p class="session-name">Fine Art Shoot</p>
+                        <p class="session-info">4 hours · 50 edited files</p>
+                    </div>
+                    <span class="session-price">$650</span>
+                </div>
+                <div class="session" data-price="480">
+                    <div>
+                        <p class="session-name">Celestial Couple</p>
+                        <p class="session-info">2 hours · 30 edited files</p>
+                    </div>
+                    <span class="session-price">$480</span>
+                </div>
+                <div class="session" data-price="850">
+                    <div>
+                        <p class="session-name">Editorial Session</p>
+                        <p class="session-info">Full day · 80 edited files</p>
+                    </div>
+                    <span class="session-price">$850</span>
+                </div>
+                <div class="session" data-price="1400">
+                    <div>
+                        <p class="session-name">Astral Experience</p>
+                        <p class="session-info">Full day · 100+ files</p>
+                    </div>
+                    <span class="session-price">From $1,400</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right - Form -->
+        <div class="booking-right">
+            <p class="form-section-title">Complete Your Booking</p>
+
+            <!-- Simple Calendar -->
+            <div class="calendar">
+                <div class="calendar-header">
+                    <button onclick="prevMonth()">&#8249;</button>
+                    <span id="cal-month">April 2026</span>
+                    <button onclick="nextMonth()">&#8250;</button>
+                </div>
+                <div class="calendar-days">
+                    <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                </div>
+                <div class="calendar-dates" id="cal-dates">
+                    <!-- Filled by JS -->
+                    <span></span><span></span><span></span>
+                    <span class="avail" onclick="pickDate(this)">1</span>
+                    <span class="avail" onclick="pickDate(this)">2</span>
+                    <span class="booked">3</span>
+                    <span class="avail" onclick="pickDate(this)">4</span>
+                    <span class="avail" onclick="pickDate(this)">5</span>
+                    <span class="avail" onclick="pickDate(this)">6</span>
+                    <span class="avail" onclick="pickDate(this)">7</span>
+                    <span class="booked">8</span>
+                    <span class="avail" onclick="pickDate(this)">9</span>
+                    <span class="avail" onclick="pickDate(this)">10</span>
+                    <span class="avail" onclick="pickDate(this)">11</span>
+                    <span class="avail" onclick="pickDate(this)">12</span>
+                    <span class="booked">13</span>
+                    <span class="avail" onclick="pickDate(this)">14</span>
+                    <span class="avail" onclick="pickDate(this)">15</span>
+                    <span class="avail" onclick="pickDate(this)">16</span>
+                    <span class="booked">17</span>
+                    <span class="avail" onclick="pickDate(this)">18</span>
+                    <span class="avail" onclick="pickDate(this)">19</span>
+                    <span class="avail" onclick="pickDate(this)">20</span>
+                    <span class="avail" onclick="pickDate(this)">21</span>
+                    <span class="avail" onclick="pickDate(this)">22</span>
+                    <span class="booked">23</span>
+                    <span class="avail" onclick="pickDate(this)">24</span>
+                    <span class="avail" onclick="pickDate(this)">25</span>
+                </div>
+            </div>
+
+            <!-- Booking Form -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" placeholder="Jane">
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" placeholder="Smith">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="jane@example.com">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" placeholder="(503) 555-0000">
+            </div>
+            <div class="form-group">
+                <label for="notes">Vision / Notes</label>
+                <input type="text" id="notes" placeholder="Tell us your idea or style reference...">
+            </div>
+
+            <button class="confirm-btn" id="confirm-btn" onclick="submitBooking()">
+                Confirm Booking — $350 Deposit
+            </button>
+            <p id="booking-success" style="display:none; color:#00B050; margin-top:12px; font-size:14px;">
+                Thank you! We received your booking request and will be in touch within 24 hours.
+            </p>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1171 @@
+/* ============================================
+   Digital Dreams Photography - Stylesheet
+   Student: Dominique Winkleman
+   Course: IT299 | Project #123345
+   April 1, 2026
+   ============================================ */
+
+/* --- CSS Variables (color palette) --- */
+:root {
+    --bg-dark: #07060f;
+    --bg-mid: #0d0b1e;
+    --bg-card: #131228;
+    --border-color: #2a2650;
+    --text-muted: #6b658f;
+    --text-main: #c4bfdf;
+    --text-light: #e8e4f5;
+    --white: #f5f3ff;
+    --purple: #7c5cbf;
+    --purple-light: #9d7de8;
+    --lavender: #c8b8f0;
+}
+
+/* --- Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: Georgia, serif;
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    height: 70px;
+    background: rgba(7, 6, 15, 0.95);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+    font-size: 22px;
+    color: var(--white);
+    letter-spacing: 0.04em;
+}
+
+.logo a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.logo span {
+    color: var(--lavender);
+    font-style: italic;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--lavender);
+}
+
+.book-btn {
+    background-color: var(--purple);
+    color: var(--white) !important;
+    padding: 8px 20px;
+}
+
+.book-btn:hover {
+    background-color: var(--purple-light) !important;
+}
+
+/* ============================================
+   HERO SECTION (Homepage)
+   ============================================ */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: radial-gradient(ellipse 85% 75% at 60% 40%, #1a0f3a 0%, #0d0b1e 50%, #07060f 100%);
+    padding-top: 70px;
+}
+
+/* Star effect using CSS */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,0.8) 0%, transparent 100%),
+        radial-gradient(1px 1px at 30% 10%, rgba(200,184,240,0.6) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 50% 15%, rgba(255,255,255,0.7) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 25%, rgba(200,184,240,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 10% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(2px 2px at 75% 45%, rgba(180,154,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 55% 65%, rgba(180,154,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 55%, rgba(200,184,240,0.4) 0%, transparent 100%);
+}
+
+/* Purple glow overlay */
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 50% 45% at 70% 38%, rgba(124,92,191,0.2) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 28% at 82% 25%, rgba(157,125,232,0.12) 0%, transparent 60%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding-left: 80px;
+    max-width: 550px;
+}
+
+.tagline {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: 68px;
+    font-weight: normal;
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 22px;
+}
+
+.hero h1 em {
+    font-style: italic;
+    color: var(--lavender);
+}
+
+.hero-desc {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: var(--text-main);
+    margin-bottom: 38px;
+    max-width: 370px;
+    line-height: 1.85;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.btn-main {
+    background-color: var(--purple);
+    color: var(--white);
+    padding: 13px 32px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s;
+}
+
+.btn-main:hover {
+    background-color: var(--purple-light);
+}
+
+.btn-outline-light {
+    color: var(--lavender);
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(200,184,240,0.4);
+    padding-bottom: 2px;
+}
+
+.btn-outline-light:hover {
+    border-color: var(--lavender);
+}
+
+/* ============================================
+   SHARED SECTION STYLES
+   ============================================ */
+section {
+    padding: 80px 72px;
+}
+
+.section-tag {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 10px;
+}
+
+section h2 {
+    font-size: 42px;
+    font-weight: normal;
+    color: var(--white);
+    margin-bottom: 40px;
+    line-height: 1.1;
+}
+
+/* ============================================
+   FEATURED GRID (Homepage)
+   ============================================ */
+.featured {
+    padding: 80px 72px;
+}
+
+.featured-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-rows: 255px 255px;
+    gap: 4px;
+}
+
+.featured-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.featured-item.featured-tall {
+    grid-row: span 2;
+}
+
+.featured-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s;
+}
+
+.featured-item:hover img {
+    transform: scale(1.05);
+}
+
+.item-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    background: linear-gradient(to top, rgba(7,6,15,0.85), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.featured-item:hover .item-overlay {
+    opacity: 1;
+}
+
+.item-tag {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    margin-bottom: 4px;
+}
+
+.item-name {
+    font-size: 20px;
+    color: var(--white);
+}
+
+/* ============================================
+   STATS BAR (Homepage)
+   ============================================ */
+.stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    margin: 0 72px;
+}
+
+.stat {
+    padding: 34px 24px;
+    border-right: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.stat:last-child {
+    border-right: none;
+}
+
+.stat-number {
+    font-size: 46px;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* ============================================
+   TESTIMONIALS (Homepage)
+   ============================================ */
+.testimonials {
+    background-color: var(--bg-mid);
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+}
+
+.testimonial {
+    background-color: var(--bg-card);
+    padding: 30px 26px;
+    border-top: 2px solid var(--purple);
+}
+
+.testimonial p {
+    font-size: 14px;
+    color: var(--text-main);
+    font-style: italic;
+    line-height: 1.8;
+    margin-bottom: 18px;
+}
+
+.testimonial strong {
+    display: block;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.testimonial span {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: var(--lavender);
+}
+
+/* ============================================
+   PAGE HEADER (inner pages)
+   ============================================ */
+.page-header {
+    height: 280px;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 72px 40px;
+    margin-top: 70px;
+    background: radial-gradient(ellipse 100% 80% at 50% 50%, #1a0f3a 0%, #0d0b1e 60%, #07060f 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Stars on inner page headers */
+.page-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(1px 1px at 12% 30%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 32% 15%, rgba(200,184,240,0.7) 0%, transparent 100%),
+        radial-gradient(1px 1px at 58% 25%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 12%, rgba(180,154,255,0.6) 0%, transparent 100%),
+        radial-gradient(2px 2px at 46% 42%, rgba(157,125,232,0.4) 0%, transparent 100%);
+}
+
+.page-header h1 {
+    font-size: 54px;
+    font-weight: normal;
+    color: var(--white);
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.page-header h1 em {
+    font-style: italic;
+    color: var(--lavender);
+}
+
+/* ============================================
+   GALLERY PAGE
+   ============================================ */
+.filter-bar {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 72px;
+    overflow-x: auto;
+}
+
+.filter-btn {
+    padding: 15px 22px;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+}
+
+.filter-btn:hover {
+    color: var(--text-light);
+}
+
+.filter-btn.active {
+    color: var(--lavender);
+    border-bottom-color: var(--lavender);
+}
+
+.gallery-grid {
+    padding: 40px 72px;
+    columns: 3;
+    column-gap: 4px;
+}
+
+.gallery-item {
+    break-inside: avoid;
+    margin-bottom: 4px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s;
+}
+
+.gallery-item.tall img {
+    height: 340px;
+}
+
+.gallery-item.med img {
+    height: 260px;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.04);
+}
+
+.photo-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 14px 12px 10px;
+    background: linear-gradient(to top, rgba(7,6,15,0.85), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.gallery-item:hover .photo-label {
+    opacity: 1;
+}
+
+.photo-title {
+    display: block;
+    font-size: 15px;
+    color: var(--white);
+}
+
+.photo-cat {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--lavender);
+}
+
+/* ============================================
+   SERVICES PAGE
+   ============================================ */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background-color: var(--border-color);
+}
+
+.service-card {
+    background-color: var(--bg-mid);
+    padding: 38px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+}
+
+.service-card:hover {
+    background-color: var(--bg-card);
+}
+
+/* Purple top bar that slides in on hover */
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--purple);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+}
+
+.service-card:hover::before {
+    transform: scaleX(1);
+}
+
+.service-num {
+    font-size: 50px;
+    color: rgba(124, 92, 191, 0.15);
+    line-height: 1;
+    margin-bottom: 12px;
+}
+
+.service-card h3 {
+    font-size: 24px;
+    color: var(--white);
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+.service-card p {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: var(--text-main);
+    line-height: 1.75;
+    margin-bottom: 16px;
+}
+
+.price {
+    font-size: 28px;
+    color: var(--lavender);
+    margin-bottom: 6px;
+}
+
+.includes-label {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+.service-card ul {
+    list-style: none;
+    margin-bottom: 22px;
+}
+
+.service-card ul li {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: var(--text-main);
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    padding-left: 16px;
+    position: relative;
+}
+
+.service-card ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--purple);
+    font-size: 10px;
+}
+
+.btn-outline {
+    display: inline-block;
+    border: 1px solid var(--purple);
+    color: var(--lavender);
+    padding: 9px 22px;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-outline:hover {
+    background-color: var(--purple);
+    color: var(--white);
+}
+
+.addons-section {
+    padding: 60px 72px;
+}
+
+.addons-section h2 {
+    font-size: 32px;
+    font-weight: normal;
+    color: var(--white);
+    margin-bottom: 28px;
+}
+
+.addons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background-color: var(--border-color);
+}
+
+.addon {
+    background-color: var(--bg-mid);
+    padding: 20px 18px;
+}
+
+.addon-name {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: var(--white);
+    margin-bottom: 6px;
+}
+
+.addon-price {
+    font-size: 20px;
+    color: var(--lavender);
+}
+
+/* ============================================
+   ABOUT PAGE
+   ============================================ */
+.about-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 70px);
+    margin-top: 70px;
+}
+
+.about-photo {
+    position: relative;
+    overflow: hidden;
+}
+
+.about-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.photo-credit {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    right: 30px;
+    text-align: center;
+    padding: 16px;
+    background: rgba(7,6,15,0.7);
+    border: 1px solid rgba(180,154,255,0.2);
+}
+
+.photo-credit h3 {
+    font-size: 22px;
+    color: var(--white);
+    font-weight: normal;
+    margin-bottom: 4px;
+}
+
+.photo-credit p {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--lavender);
+}
+
+.about-content {
+    padding: 70px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--bg-mid);
+}
+
+.about-content blockquote {
+    font-size: 30px;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.35;
+    margin-bottom: 28px;
+    border: none;
+}
+
+.about-content p {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: var(--text-main);
+    line-height: 1.85;
+    margin-bottom: 18px;
+}
+
+.credentials {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background-color: var(--border-color);
+    margin-top: 28px;
+    border: 1px solid var(--border-color);
+}
+
+.cred-item {
+    background-color: var(--bg-dark);
+    padding: 14px 16px;
+}
+
+.cred-label {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 4px;
+}
+
+.cred-value {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: var(--white);
+}
+
+/* ============================================
+   BOOKING PAGE
+   ============================================ */
+.booking-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    min-height: calc(100vh - 70px);
+    margin-top: 70px;
+}
+
+.booking-left {
+    background-color: var(--bg-mid);
+    padding: 60px 50px;
+    border-right: 1px solid var(--border-color);
+}
+
+.booking-left h2 {
+    font-size: 40px;
+    font-weight: normal;
+    color: var(--white);
+    margin-bottom: 10px;
+}
+
+.booking-left > p {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: var(--text-main);
+    margin-bottom: 34px;
+}
+
+.session-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.session {
+    padding: 16px 18px;
+    background-color: var(--bg-card);
+    border-left: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.session:hover,
+.session.selected {
+    border-left-color: var(--purple);
+    background-color: #1a1830;
+}
+
+.session-name {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: var(--white);
+    margin-bottom: 3px;
+}
+
+.session-info {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.session-price {
+    font-size: 20px;
+    color: var(--lavender);
+}
+
+.booking-right {
+    padding: 60px 44px;
+    background-color: var(--bg-dark);
+}
+
+.form-section-title {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 26px;
+}
+
+/* Calendar */
+.calendar {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 14px;
+    margin-bottom: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.calendar-header span {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: var(--white);
+}
+
+.calendar-header button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 2px 6px;
+}
+
+.calendar-header button:hover {
+    color: var(--lavender);
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.calendar-days span {
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    padding: 4px 0;
+}
+
+.calendar-dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    text-align: center;
+}
+
+.calendar-dates span {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: var(--text-main);
+    padding: 6px 2px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.calendar-dates span:hover {
+    background-color: var(--border-color);
+    color: var(--white);
+}
+
+.calendar-dates span.avail {
+    color: var(--text-light);
+}
+
+.calendar-dates span.booked {
+    color: var(--text-muted);
+    text-decoration: line-through;
+    cursor: not-allowed;
+}
+
+.calendar-dates span.picked {
+    background-color: var(--purple);
+    color: var(--white);
+}
+
+/* Form fields */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    background-color: var(--bg-mid);
+    border: 1px solid var(--border-color);
+    color: var(--white);
+    padding: 10px 13px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--purple);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+.form-group select {
+    cursor: pointer;
+}
+
+.confirm-btn {
+    width: 100%;
+    padding: 13px;
+    background-color: var(--purple);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+    margin-top: 6px;
+}
+
+.confirm-btn:hover {
+    background-color: var(--purple-light);
+}
+
+/* ============================================
+   CONTACT PAGE
+   ============================================ */
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 70px);
+    margin-top: 70px;
+}
+
+.contact-info {
+    background-color: var(--bg-mid);
+    padding: 70px 58px;
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-info h2 {
+    font-size: 46px;
+    font-weight: normal;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 16px;
+}
+
+.contact-info h2 em {
+    font-style: italic;
+    color: var(--lavender);
+}
+
+.contact-info > p {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: var(--text-main);
+    margin-bottom: 42px;
+    max-width: 340px;
+    line-height: 1.8;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-item {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.contact-label {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 4px;
+}
+
+.contact-value {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: var(--white);
+}
+
+.contact-form {
+    padding: 70px 58px;
+    background-color: var(--bg-dark);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 13px;
+    background-color: var(--purple);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+    margin-top: 6px;
+}
+
+.submit-btn:hover {
+    background-color: var(--purple-light);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer {
+    border-top: 1px solid var(--border-color);
+    padding: 38px 72px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-mid);
+}
+
+.footer-logo {
+    font-size: 18px;
+    color: var(--white);
+}
+
+.footer-logo a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.footer-logo span {
+    color: var(--lavender);
+    font-style: italic;
+}
+
+footer > p {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.footer-links {
+    display: flex;
+    gap: 22px;
+}
+
+.footer-links a {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: var(--lavender);
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!-- Digital Dreams Photography - Gallery Page
+     Created by Dominique Winkleman for IT299 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Digital Dreams Photography</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo"><a href="index.html">Digital <span>Dreams</span></a></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="gallery.html" class="active">Gallery</a>
+            <a href="services.html">Services</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="booking.html" class="book-btn">Book a Session</a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>The <em>Gallery</em></h1>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All Work</button>
+        <button class="filter-btn" data-filter="portrait">Portrait</button>
+        <button class="filter-btn" data-filter="couples">Couples</button>
+        <button class="filter-btn" data-filter="fineart">Fine Art</button>
+        <button class="filter-btn" data-filter="editorial">Editorial</button>
+        <button class="filter-btn" data-filter="outdoor">Outdoor</button>
+    </div>
+
+    <!-- Photo Grid -->
+    <div class="gallery-grid">
+        <div class="gallery-item tall" data-category="portrait">
+            <img src="images/gallery-1.jpg" alt="Portrait session photo">
+        </div>
+        <div class="gallery-item" data-category="couples">
+            <img src="images/gallery-2.jpg" alt="Couples session photo">
+        </div>
+        <div class="gallery-item med" data-category="outdoor">
+            <img src="images/gallery-3.jpg" alt="Outdoor portrait">
+        </div>
+        <div class="gallery-item med" data-category="fineart">
+            <img src="images/gallery-4.jpg" alt="Fine art photo">
+        </div>
+        <div class="gallery-item" data-category="editorial">
+            <img src="images/gallery-5.jpg" alt="Editorial shoot">
+        </div>
+        <div class="gallery-item tall" data-category="portrait">
+            <img src="images/gallery-6.jpg" alt="Portrait photo">
+        </div>
+        <div class="gallery-item" data-category="couples">
+            <img src="images/gallery-7.jpg" alt="Couples photo">
+        </div>
+        <div class="gallery-item med" data-category="outdoor">
+            <img src="images/gallery-8.jpg" alt="Outdoor photo">
+        </div>
+        <div class="gallery-item" data-category="fineart">
+            <img src="images/gallery-9.jpg" alt="Fine art photo">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo"><a href="index.html">Digital <span>Dreams</span></a></div>
+        <p>© 2026 Digital Dreams Photography.</p>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="booking.html">Book</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

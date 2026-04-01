@@ -1,546 +1,121 @@
 <!DOCTYPE html>
+<!-- Digital Dreams Photography - Homepage
+     Created by Dominique Winkleman for IT299 -->
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Digital Dreams Photography</title>
-<style>
-  :root {
-    --black:   #07060f;
-    --deep:    #0d0b1e;
-    --card:    #131228;
-    --border:  #2a2650;
-    --muted:   #6b658f;
-    --text:    #c4bfdf;
-    --light:   #e8e4f5;
-    --white:   #f5f3ff;
-    --purple:  #7c5cbf;
-    --violet:  #9d7de8;
-    --lavender:#c8b8f0;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--black); color:var(--text); font-family:Georgia,serif; font-size:15px; line-height:1.75; }
-
-  nav {
-    position:fixed; top:0; left:0; right:0; z-index:100;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:0 52px; height:70px;
-    background:rgba(7,6,15,0.95); border-bottom:1px solid var(--border);
-  }
-  .nav-logo { font-size:22px; color:var(--white); cursor:pointer; letter-spacing:0.04em; }
-  .nav-logo span { color:var(--lavender); font-style:italic; }
-  .nav-links { display:flex; gap:32px; align-items:center; }
-  .nav-links a { color:var(--text); text-decoration:none; font-family:Arial,sans-serif; font-size:11.5px; letter-spacing:0.13em; text-transform:uppercase; cursor:pointer; transition:color 0.2s; }
-  .nav-links a:hover, .nav-links a.active { color:var(--lavender); }
-  .nav-book { background:var(--purple); color:var(--white) !important; padding:8px 22px; }
-  .nav-book:hover { background:var(--violet) !important; }
-
-  .page { display:none; padding-top:70px; min-height:100vh; }
-  .page.active { display:block; }
-
-  /* HOME */
-  .hero {
-    position:relative; height:calc(100vh - 70px);
-    display:flex; align-items:center; overflow:hidden;
-    background:radial-gradient(ellipse 85% 75% at 65% 38%, #1a0f3a 0%, #0d0b1e 45%, #07060f 100%);
-  }
-  .stars {
-    position:absolute; inset:0;
-    background-image:
-      radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,0.8) 0%, transparent 100%),
-      radial-gradient(1px 1px at 28% 9%,  rgba(200,184,240,0.6) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 48% 14%, rgba(255,255,255,0.7) 0%, transparent 100%),
-      radial-gradient(1px 1px at 68% 6%,  rgba(255,255,255,0.5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 83% 22%, rgba(200,184,240,0.6) 0%, transparent 100%),
-      radial-gradient(1px 1px at 94% 11%, rgba(255,255,255,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 6%  38%, rgba(255,255,255,0.4) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 22% 52%, rgba(180,154,255,0.5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 44% 44%, rgba(255,255,255,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 58% 28%, rgba(255,255,255,0.5) 0%, transparent 100%),
-      radial-gradient(2px 2px at 74% 42%, rgba(180,154,255,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 88% 35%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 4%  62%, rgba(200,184,240,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 32% 68%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 54% 60%, rgba(180,154,255,0.5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 76% 65%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 96% 52%, rgba(200,184,240,0.4) 0%, transparent 100%);
-  }
-  .nebula {
-    position:absolute; inset:0;
-    background:
-      radial-gradient(ellipse 55% 48% at 68% 37%, rgba(124,92,191,0.2) 0%, transparent 70%),
-      radial-gradient(ellipse 35% 30% at 80% 24%, rgba(157,125,232,0.13) 0%, transparent 60%),
-      radial-gradient(ellipse 40% 35% at 55% 55%, rgba(90,60,160,0.1) 0%, transparent 60%);
-  }
-  .hero-orb {
-    position:absolute; right:9%; top:50%; transform:translateY(-50%);
-    width:360px; height:360px;
-  }
-  .orb-ring { position:absolute; border-radius:50%; border:1px solid rgba(180,154,255,0.2); }
-  .orb-ring-1 { inset:0; }
-  .orb-ring-2 { inset:20px; border-color:rgba(124,92,191,0.25); }
-  .orb-ring-3 { inset:40px; border-color:rgba(180,154,255,0.15); }
-  .orb-inner {
-    position:absolute; inset:58px; border-radius:50%;
-    background:radial-gradient(circle at 42% 38%, rgba(157,125,232,0.35) 0%, rgba(90,60,160,0.18) 40%, rgba(30,20,70,0.5) 100%);
-    border:1px solid rgba(180,154,255,0.3);
-    box-shadow:0 0 40px rgba(124,92,191,0.2), inset 0 0 30px rgba(157,125,232,0.1);
-  }
-  .orb-inner::before {
-    content:''; position:absolute; inset:0; border-radius:50%;
-    background-image:
-      radial-gradient(1px 1px at 30% 35%, rgba(255,255,255,0.8) 0%, transparent 100%),
-      radial-gradient(1px 1px at 55% 25%, rgba(255,255,255,0.6) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 70% 50%, rgba(200,184,240,0.7) 0%, transparent 100%),
-      radial-gradient(1px 1px at 40% 65%, rgba(255,255,255,0.5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 60% 70%, rgba(180,154,255,0.6) 0%, transparent 100%);
-  }
-  .hero-content { position:relative; z-index:2; padding:0 80px; max-width:560px; }
-  .eyebrow { font-family:Arial,sans-serif; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--lavender); margin-bottom:20px; display:flex; align-items:center; gap:12px; }
-  .eyebrow::before { content:''; width:34px; height:1px; background:var(--lavender); }
-  .hero-title { font-size:70px; font-weight:normal; line-height:0.97; color:var(--white); margin-bottom:24px; }
-  .hero-title em { font-style:italic; color:var(--lavender); }
-  .hero-sub { font-family:Arial,sans-serif; font-size:14px; color:var(--text); margin-bottom:40px; max-width:380px; line-height:1.85; }
-  .hero-ctas { display:flex; gap:16px; align-items:center; }
-  .btn-primary { background:var(--purple); color:var(--white); padding:13px 34px; font-family:Arial,sans-serif; font-size:11.5px; font-weight:bold; letter-spacing:0.14em; text-transform:uppercase; border:none; cursor:pointer; transition:background 0.2s; text-decoration:none; display:inline-block; }
-  .btn-primary:hover { background:var(--violet); }
-  .btn-ghost { color:var(--lavender); font-family:Arial,sans-serif; font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase; text-decoration:none; border-bottom:1px solid rgba(200,184,240,0.4); padding-bottom:2px; cursor:pointer; }
-
-  .section { padding:80px 72px; }
-  .section-label { font-family:Arial,sans-serif; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--violet); margin-bottom:10px; display:flex; align-items:center; gap:10px; }
-  .section-label::before { content:''; width:26px; height:1px; background:var(--violet); }
-  .section-title { font-size:44px; font-weight:normal; color:var(--white); line-height:1.1; margin-bottom:40px; }
-
-  .feat-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr; grid-template-rows:255px 255px; gap:3px; }
-  .feat-item { position:relative; overflow:hidden; cursor:pointer; }
-  .feat-item.tall { grid-row:span 2; }
-  .feat-bg { position:absolute; inset:0; transition:transform 0.6s; }
-  .feat-item:hover .feat-bg { transform:scale(1.04); }
-  .d1 { background:radial-gradient(ellipse 80% 60% at 50% 55%, #2d1854 0%, #1a0f3a 40%, #0a0818 100%); }
-  .d1::after,.d2::after,.d3::after,.d4::after,.d5::after { content:''; position:absolute; inset:0; }
-  .d1::after { background:radial-gradient(circle at 40% 35%, rgba(157,125,232,0.35),transparent 55%), radial-gradient(1.5px 1.5px at 25% 30%,white 0%,transparent 100%), radial-gradient(1px 1px at 60% 20%,rgba(200,184,240,0.7) 0%,transparent 100%), radial-gradient(2px 2px at 50% 50%,rgba(180,154,255,0.6) 0%,transparent 100%); }
-  .d2 { background:radial-gradient(ellipse 70% 70% at 50% 40%, #1a1040 0%, #0e0820 100%); }
-  .d2::after { background:radial-gradient(ellipse 60% 40% at 50% 80%,rgba(124,92,191,0.4),transparent), radial-gradient(1px 1px at 20% 25%,white 0%,transparent 100%), radial-gradient(1.5px 1.5px at 70% 15%,rgba(200,184,240,0.8) 0%,transparent 100%), radial-gradient(2px 2px at 80% 60%,rgba(180,154,255,0.5) 0%,transparent 100%); }
-  .d3 { background:radial-gradient(ellipse 90% 60% at 50% 50%, #25103a 0%, #120820 100%); }
-  .d3::after { background:radial-gradient(circle at 55% 30%,rgba(200,150,255,0.25),transparent 50%), radial-gradient(1px 1px at 30% 20%,white 0%,transparent 100%), radial-gradient(1.5px 1.5px at 80% 55%,rgba(180,154,255,0.7) 0%,transparent 100%); }
-  .d4 { background:radial-gradient(ellipse 80% 80% at 40% 50%, #160e38 0%, #09070f 100%); }
-  .d4::after { background:radial-gradient(ellipse 100% 50% at 50% 100%,rgba(90,60,160,0.3),transparent), radial-gradient(1px 1px at 35% 20%,white 0%,transparent 100%), radial-gradient(2px 2px at 55% 40%,rgba(157,125,232,0.5) 0%,transparent 100%); }
-  .d5 { background:radial-gradient(ellipse 70% 70% at 60% 45%, #1e0f40 0%, #0c0818 100%); }
-  .d5::after { background:radial-gradient(circle at 35% 40%,rgba(124,92,191,0.3),transparent 55%), radial-gradient(1px 1px at 20% 30%,white 0%,transparent 100%), radial-gradient(1.5px 1.5px at 60% 20%,rgba(200,184,240,0.6) 0%,transparent 100%); }
-  .feat-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(7,6,15,0.8) 0%,transparent 55%); display:flex; flex-direction:column; justify-content:flex-end; padding:18px; opacity:0; transition:opacity 0.3s; }
-  .feat-item:hover .feat-overlay { opacity:1; }
-  .feat-tag { font-family:Arial,sans-serif; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--lavender); margin-bottom:4px; }
-  .feat-name { font-size:20px; color:var(--white); }
-
-  .stats-row { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--border); border-bottom:1px solid var(--border); margin:0 72px; }
-  .stat-item { padding:34px 26px; border-right:1px solid var(--border); text-align:center; }
-  .stat-item:last-child { border-right:none; }
-  .stat-num { font-size:46px; color:var(--white); line-height:1; margin-bottom:7px; }
-  .stat-num span { font-size:22px; color:var(--lavender); }
-  .stat-label { font-family:Arial,sans-serif; font-size:11px; letter-spacing:0.13em; text-transform:uppercase; color:var(--muted); }
-
-  /* GALLERY */
-  .page-hero { height:280px; position:relative; overflow:hidden; display:flex; align-items:flex-end; padding:0 72px 40px; }
-  .page-hero.gh { background:radial-gradient(ellipse 100% 80% at 50% 50%, #1a0f3a 0%, #0d0b1e 60%, #07060f 100%); }
-  .page-hero.sh { background:radial-gradient(ellipse 100% 80% at 30% 60%, #1c1040 0%, #0d0b1e 60%, #07060f 100%); }
-  .page-hero::before { content:''; position:absolute; inset:0; background-image:radial-gradient(1px 1px at 10% 30%,rgba(255,255,255,0.6) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 30% 15%,rgba(200,184,240,0.7) 0%,transparent 100%),radial-gradient(1px 1px at 55% 25%,rgba(255,255,255,0.5) 0%,transparent 100%),radial-gradient(1px 1px at 78% 10%,rgba(180,154,255,0.6) 0%,transparent 100%),radial-gradient(2px 2px at 45% 40%,rgba(157,125,232,0.4) 0%,transparent 100%); }
-  .page-title { font-size:56px; font-weight:normal; color:var(--white); line-height:1; position:relative; z-index:1; }
-  .page-title em { font-style:italic; color:var(--lavender); }
-
-  .filters { display:flex; border-bottom:1px solid var(--border); padding:0 72px; overflow-x:auto; }
-  .filter-btn { padding:15px 24px; font-family:Arial,sans-serif; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); background:none; border:none; cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; transition:color 0.2s,border-color 0.2s; white-space:nowrap; }
-  .filter-btn.active { color:var(--lavender); border-bottom-color:var(--lavender); }
-
-  .masonry { padding:40px 72px; columns:3; column-gap:3px; }
-  .g-item { break-inside:avoid; margin-bottom:3px; position:relative; overflow:hidden; cursor:pointer; }
-  .g-img { width:100%; display:block; position:relative; transition:transform 0.5s; }
-  .g-item:hover .g-img { transform:scale(1.04); }
-  .g-img.tall { height:310px; }
-  .g-img.short { height:185px; }
-  .g-img.med { height:240px; }
-  .gi1{background:radial-gradient(ellipse 80% 70% at 45% 45%,#2a1550 0%,#150d30 50%,#080614 100%);} .gi1::after,.gi2::after,.gi3::after,.gi4::after,.gi5::after,.gi6::after,.gi7::after,.gi8::after,.gi9::after{content:'';position:absolute;inset:0;}
-  .gi1::after{background:radial-gradient(circle at 40% 35%,rgba(157,125,232,0.3),transparent 55%),radial-gradient(1.5px 1.5px at 25% 25%,white 0%,transparent 100%),radial-gradient(1px 1px at 60% 18%,rgba(200,184,240,0.8) 0%,transparent 100%),radial-gradient(2px 2px at 70% 55%,rgba(180,154,255,0.6) 0%,transparent 100%);}
-  .gi2{background:radial-gradient(ellipse 70% 60% at 55% 50%,#1c1045 0%,#0e0820 100%);} .gi2::after{background:radial-gradient(ellipse 80% 40% at 50% 85%,rgba(90,60,160,0.4),transparent),radial-gradient(1px 1px at 30% 20%,white 0%,transparent 100%),radial-gradient(1.5px 1.5px at 65% 30%,rgba(200,184,240,0.7) 0%,transparent 100%);}
-  .gi3{background:radial-gradient(ellipse 90% 70% at 50% 40%,#22103a 0%,#110820 100%);} .gi3::after{background:radial-gradient(circle at 55% 30%,rgba(200,150,255,0.22),transparent 50%),radial-gradient(1px 1px at 20% 25%,white 0%,transparent 100%),radial-gradient(2px 2px at 50% 50%,rgba(180,154,255,0.6) 0%,transparent 100%);}
-  .gi4{background:radial-gradient(ellipse 80% 80% at 40% 45%,#18103a 0%,#0b0818 100%);} .gi4::after{background:radial-gradient(ellipse 100% 50% at 50% 100%,rgba(100,65,180,0.35),transparent),radial-gradient(1.5px 1.5px at 35% 22%,rgba(200,184,240,0.8) 0%,transparent 100%);}
-  .gi5{background:radial-gradient(ellipse 70% 65% at 55% 45%,#1e1045 0%,#0c0818 100%);} .gi5::after{background:radial-gradient(circle at 35% 40%,rgba(124,92,191,0.28),transparent 55%),radial-gradient(1px 1px at 25% 28%,white 0%,transparent 100%),radial-gradient(1.5px 1.5px at 65% 18%,rgba(200,184,240,0.7) 0%,transparent 100%);}
-  .gi6{background:radial-gradient(ellipse 85% 75% at 45% 40%,#26123e 0%,#130a20 100%);} .gi6::after{background:radial-gradient(ellipse 60% 50% at 60% 35%,rgba(157,125,232,0.25),transparent),radial-gradient(1px 1px at 30% 30%,white 0%,transparent 100%),radial-gradient(2px 2px at 55% 55%,rgba(180,154,255,0.5) 0%,transparent 100%);}
-  .gi7{background:radial-gradient(ellipse 75% 70% at 50% 50%,#1a1040 0%,#09070f 100%);} .gi7::after{background:radial-gradient(circle at 50% 40%,rgba(140,100,220,0.28),transparent 55%),radial-gradient(1.5px 1.5px at 20% 20%,white 0%,transparent 100%),radial-gradient(1px 1px at 65% 28%,rgba(200,184,240,0.6) 0%,transparent 100%);}
-  .gi8{background:radial-gradient(ellipse 80% 70% at 48% 42%,#200e38 0%,#0f0818 100%);} .gi8::after{background:radial-gradient(ellipse 70% 50% at 45% 30%,rgba(157,125,232,0.2),transparent),radial-gradient(1px 1px at 30% 25%,white 0%,transparent 100%),radial-gradient(2px 2px at 60% 45%,rgba(180,154,255,0.55) 0%,transparent 100%);}
-  .gi9{background:radial-gradient(ellipse 90% 80% at 52% 48%,#1c1040 0%,#0a0818 100%);} .gi9::after{background:radial-gradient(circle at 42% 38%,rgba(124,92,191,0.3),transparent 50%),radial-gradient(1.5px 1.5px at 28% 22%,white 0%,transparent 100%),radial-gradient(1px 1px at 58% 32%,rgba(200,184,240,0.7) 0%,transparent 100%);}
-  .g-label{position:absolute;bottom:0;left:0;right:0;padding:16px 14px 12px;background:linear-gradient(to top,rgba(7,6,15,0.85),transparent);opacity:0;transition:opacity 0.3s;z-index:2;}
-  .g-item:hover .g-label{opacity:1;}
-  .g-title{font-size:16px;color:var(--white);display:block;}
-  .g-loc{font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--lavender);}
-
-  /* SERVICES */
-  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
-  .svc-card{background:var(--deep);padding:40px 34px;position:relative;overflow:hidden;transition:background 0.3s;}
-  .svc-card:hover{background:var(--card);}
-  .svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--purple);transform:scaleX(0);transform-origin:left;transition:transform 0.4s;}
-  .svc-card:hover::before{transform:scaleX(1);}
-  .svc-num{font-size:52px;color:rgba(124,92,191,0.14);line-height:1;margin-bottom:12px;}
-  .svc-name{font-size:24px;color:var(--white);margin-bottom:10px;}
-  .svc-desc{font-family:Arial,sans-serif;font-size:13px;color:var(--text);line-height:1.75;margin-bottom:20px;}
-  .svc-price{font-size:28px;color:var(--lavender);margin-bottom:5px;}
-  .svc-incl{font-family:Arial,sans-serif;font-size:10.5px;letter-spacing:0.12em;color:var(--muted);text-transform:uppercase;margin-bottom:18px;}
-  .svc-list{list-style:none;margin-bottom:24px;}
-  .svc-list li{font-family:Arial,sans-serif;font-size:12.5px;color:var(--text);padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;gap:10px;}
-  .svc-list li::before{content:'';width:12px;height:1px;background:var(--purple);flex-shrink:0;}
-  .btn-outline{display:inline-block;border:1px solid var(--purple);color:var(--lavender);padding:9px 24px;font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background 0.2s,color 0.2s;background:none;}
-  .btn-outline:hover{background:var(--purple);color:var(--white);}
-  .add-ons{padding:64px 72px;}
-  .add-ons h3{font-size:34px;font-weight:normal;color:var(--white);margin-bottom:30px;}
-  .ao-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
-  .ao{background:var(--deep);padding:22px 20px;}
-  .ao-name{font-family:Arial,sans-serif;font-size:13px;color:var(--white);margin-bottom:5px;}
-  .ao-price{font-size:20px;color:var(--lavender);}
-
-  /* ABOUT */
-  .about-wrap{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 70px);}
-  .about-img-side{position:relative;overflow:hidden;background:radial-gradient(ellipse 80% 70% at 50% 45%,#200f40 0%,#120830 50%,#07060f 100%);}
-  .about-img-side::before{content:'';position:absolute;inset:0;background-image:radial-gradient(1.5px 1.5px at 20% 20%,rgba(255,255,255,0.7) 0%,transparent 100%),radial-gradient(1px 1px at 45% 12%,rgba(200,184,240,0.6) 0%,transparent 100%),radial-gradient(1px 1px at 68% 28%,rgba(255,255,255,0.5) 0%,transparent 100%),radial-gradient(2px 2px at 82% 18%,rgba(180,154,255,0.6) 0%,transparent 100%),radial-gradient(1px 1px at 15% 52%,rgba(255,255,255,0.4) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 55% 62%,rgba(200,184,240,0.5) 0%,transparent 100%);z-index:1;}
-  .about-img-side::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,rgba(124,92,191,0.2),transparent 60%);z-index:0;}
-  .about-frame{position:absolute;inset:60px;border:1px solid rgba(180,154,255,0.2);z-index:2;display:flex;align-items:center;justify-content:center;}
-  .about-frame::before{content:'';position:absolute;inset:16px;border:1px solid rgba(124,92,191,0.12);}
-  .portrait-wrap{text-align:center;z-index:3;position:relative;}
-  .portrait-circle{width:148px;height:148px;border-radius:50%;background:radial-gradient(circle,rgba(124,92,191,0.22),rgba(90,60,160,0.07));border:1px solid rgba(180,154,255,0.3);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 28px rgba(124,92,191,0.14);}
-  .portrait-icon{font-size:55px;opacity:0.32;color:var(--lavender);}
-  .portrait-name{font-size:24px;color:var(--white);}
-  .portrait-role{font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.17em;text-transform:uppercase;color:var(--lavender);}
-  .about-content{padding:68px 60px;display:flex;flex-direction:column;justify-content:center;}
-  .about-quote{font-size:32px;font-style:italic;color:var(--white);line-height:1.35;margin-bottom:28px;}
-  .about-quote em{font-style:normal;color:var(--lavender);}
-  .about-body{font-family:Arial,sans-serif;font-size:14px;color:var(--text);line-height:1.85;margin-bottom:20px;}
-  .about-creds{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:30px;}
-  .cred{background:var(--deep);padding:16px 18px;}
-  .cred-label{font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--violet);margin-bottom:3px;}
-  .cred-val{font-family:Arial,sans-serif;font-size:13px;color:var(--white);}
-
-  /* BOOKING */
-  .booking-wrap{display:grid;grid-template-columns:1.1fr 0.9fr;min-height:calc(100vh - 70px);}
-  .bk-info{background:var(--deep);padding:60px 52px;border-right:1px solid var(--border);}
-  .bk-title{font-size:42px;font-weight:normal;color:var(--white);margin-bottom:10px;line-height:1.1;}
-  .bk-sub{font-family:Arial,sans-serif;font-size:13px;color:var(--text);margin-bottom:36px;}
-  .sess-list{display:flex;flex-direction:column;gap:3px;}
-  .sess{padding:18px 20px;background:var(--card);border-left:2px solid transparent;cursor:pointer;transition:border-color 0.2s,background 0.2s;display:flex;justify-content:space-between;align-items:center;}
-  .sess:hover,.sess.sel{border-left-color:var(--purple);background:#1a1830;}
-  .sess-name{font-family:Arial,sans-serif;font-size:14px;color:var(--white);margin-bottom:3px;}
-  .sess-desc{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);}
-  .sess-price{font-size:21px;color:var(--lavender);}
-  .bk-form{padding:60px 46px;background:var(--black);}
-  .form-hdr{font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.17em;text-transform:uppercase;color:var(--violet);margin-bottom:28px;}
-  .fg{margin-bottom:18px;}
-  .fl{display:block;font-family:Arial,sans-serif;font-size:10.5px;letter-spacing:0.11em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
-  .fi{width:100%;background:var(--deep);border:1px solid var(--border);color:var(--white);padding:11px 14px;font-family:Arial,sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;}
-  .fi:focus{border-color:var(--purple);}
-  .fi::placeholder{color:var(--muted);}
-  .frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  .cal{background:var(--card);border:1px solid var(--border);padding:16px;margin-bottom:20px;}
-  .cal-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
-  .cal-mo{font-family:Arial,sans-serif;font-size:12.5px;color:var(--white);}
-  .cal-nav{background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;}
-  .cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center;}
-  .cdl{font-family:Arial,sans-serif;font-size:9px;letter-spacing:0.1em;color:var(--muted);padding:3px 0;}
-  .cd{font-family:Arial,sans-serif;font-size:11px;color:var(--text);padding:6px 2px;cursor:pointer;transition:background 0.15s;}
-  .cd:hover{background:var(--border);color:var(--white);}
-  .cd.avail{color:var(--light);}
-  .cd.booked{color:var(--muted);text-decoration:line-through;cursor:default;}
-  .cd.sel{background:var(--purple);color:var(--white);}
-  .confirm-btn{width:100%;padding:13px;background:var(--purple);color:var(--white);border:none;cursor:pointer;font-family:Arial,sans-serif;font-size:11.5px;font-weight:bold;letter-spacing:0.14em;text-transform:uppercase;transition:background 0.2s;margin-top:4px;}
-  .confirm-btn:hover{background:var(--violet);}
-
-  /* CONTACT */
-  .contact-wrap{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 70px);}
-  .ct-info{background:var(--deep);padding:68px 60px;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;}
-  .ct-title{font-size:48px;font-weight:normal;color:var(--white);line-height:1;margin-bottom:16px;}
-  .ct-title em{font-style:italic;color:var(--lavender);}
-  .ct-sub{font-family:Arial,sans-serif;font-size:13px;color:var(--text);margin-bottom:44px;max-width:350px;line-height:1.8;}
-  .ct-items{display:flex;flex-direction:column;}
-  .ct-item{padding:20px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:16px;}
-  .ct-icon{width:36px;height:36px;flex-shrink:0;border:1px solid rgba(124,92,191,0.3);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--violet);}
-  .ct-lbl{font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--violet);margin-bottom:3px;}
-  .ct-val{font-family:Arial,sans-serif;font-size:13px;color:var(--white);}
-  .ct-form{padding:68px 60px;}
-  .ct-form-hdr{font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.17em;text-transform:uppercase;color:var(--violet);margin-bottom:28px;}
-  .submit-btn{width:100%;padding:13px;background:var(--purple);color:var(--white);border:none;cursor:pointer;font-family:Arial,sans-serif;font-size:11.5px;font-weight:bold;letter-spacing:0.14em;text-transform:uppercase;transition:background 0.2s;margin-top:4px;}
-  .submit-btn:hover{background:var(--violet);}
-  textarea.fi{resize:vertical;min-height:108px;}
-
-  /* FOOTER */
-  footer{border-top:1px solid var(--border);padding:40px 72px;display:flex;justify-content:space-between;align-items:center;background:var(--deep);}
-  .f-logo{font-size:18px;color:var(--white);}
-  .f-logo span{color:var(--lavender);font-style:italic;}
-  .f-copy{font-family:Arial,sans-serif;font-size:11.5px;color:var(--muted);}
-  .f-links{display:flex;gap:24px;}
-  .f-links a{font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.11em;text-transform:uppercase;color:var(--muted);text-decoration:none;cursor:pointer;transition:color 0.2s;}
-  .f-links a:hover{color:var(--lavender);}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Dreams Photography</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav>
-  <div class="nav-logo" onclick="showPage('home')">Digital <span>Dreams</span></div>
-  <div class="nav-links">
-    <a onclick="showPage('home')" id="nav-home" class="active">Home</a>
-    <a onclick="showPage('gallery')" id="nav-gallery">Gallery</a>
-    <a onclick="showPage('services')" id="nav-services">Services</a>
-    <a onclick="showPage('about')" id="nav-about">About</a>
-    <a onclick="showPage('contact')" id="nav-contact">Contact</a>
-    <a onclick="showPage('booking')" class="nav-book">Book a Session</a>
-  </div>
-</nav>
-
-<!-- HOME -->
-<div class="page active" id="page-home">
-  <div style="background:#2a1854;border-bottom:1px solid #7c5cbf;padding:8px 52px;font-family:Arial,sans-serif;font-size:12px;color:#c8b8f0;letter-spacing:0.06em;">
-    ⚠ &nbsp; <strong>DRAFT v0.1</strong> — Work in progress. Images are placeholders. Booking backend not yet connected. Est. completion: April 1, 2026.
-  </div>
-  <section class="hero">
-    <div class="stars"></div>
-    <div class="nebula"></div>
-    <div style="position:absolute;right:9%;top:50%;transform:translateY(-50%);width:320px;height:320px;border:2px dashed rgba(180,154,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;">
-      <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(200,184,240,0.3);text-align:center;line-height:1.8;">Hero Image<br>Placeholder</div>
-    </div>
-    <div class="hero-content">
-      <div class="eyebrow">Fine Art Photography</div>
-      <h1 class="hero-title">Capture the<br><em>Dream</em></h1>
-      <p class="hero-sub">Photography that lives between reality and imagination — ethereal, luminous, and entirely your own.</p>
-      <div class="hero-ctas">
-        <button class="btn-primary" onclick="showPage('gallery')">View Portfolio</button>
-        <a class="btn-ghost" onclick="showPage('booking')">Book a Session</a>
-      </div>
-    </div>
-  </section>
-  <section class="section">
-    <div class="section-label">Featured Work</div>
-    <h2 class="section-title">Recent Collections</h2>
-    <div class="feat-grid">
-      <div class="feat-item tall" style="position:relative;"><div style="position:absolute;inset:0;background:#131228;border:1px solid #2a2650;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
-          <div style="font-size:32px;opacity:0.15;color:#c8b8f0;">&#9632;</div>
-          <div style="font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(200,184,240,0.35);">Photo Placeholder</div>
-          <div style="font-family:Arial,sans-serif;font-size:10px;color:rgba(200,184,240,0.25);">Celestial Series</div>
-        </div></div>
-      <div class="feat-item" style="position:relative;"><div style="position:absolute;inset:0;background:#131228;border:1px solid #2a2650;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
-          <div style="font-size:32px;opacity:0.15;color:#c8b8f0;">&#9632;</div>
-          <div style="font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(200,184,240,0.35);">Photo Placeholder</div>
-          <div style="font-family:Arial,sans-serif;font-size:10px;color:rgba(200,184,240,0.25);">Ethereal Light</div>
-        </div></div>
-      <div class="feat-item" style="position:relative;"><div style="position:absolute;inset:0;background:#131228;border:1px solid #2a2650;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
-          <div style="font-size:32px;opacity:0.15;color:#c8b8f0;">&#9632;</div>
-          <div style="font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(200,184,240,0.35);">Photo Placeholder</div>
-          <div style="font-family:Arial,sans-serif;font-size:10px;color:rgba(200,184,240,0.25);">Nebula Dreams</div>
-        </div></div>
-      <div class="feat-item" style="position:relative;"><div style="position:absolute;inset:0;background:#131228;border:1px solid #2a2650;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
-          <div style="font-size:32px;opacity:0.15;color:#c8b8f0;">&#9632;</div>
-          <div style="font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(200,184,240,0.35);">Photo Placeholder</div>
-          <div style="font-family:Arial,sans-serif;font-size:10px;color:rgba(200,184,240,0.25);">Midnight Bloom</div>
-        </div></div>
-      <div class="feat-item" style="position:relative;"><div style="position:absolute;inset:0;background:#131228;border:1px solid #2a2650;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
-          <div style="font-size:32px;opacity:0.15;color:#c8b8f0;">&#9632;</div>
-          <div style="font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(200,184,240,0.35);">Photo Placeholder</div>
-          <div style="font-family:Arial,sans-serif;font-size:10px;color:rgba(200,184,240,0.25);">Violet Hours</div>
-        </div></div>
-    </div>
-  </section>
-  <div class="stats-row">
-    <div class="stat-item"><div class="stat-num">10<span>+</span></div><div class="stat-label">Years Experience</div></div>
-    <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Session Types</div></div>
-    <div class="stat-item"><div class="stat-num">300<span>+</span></div><div class="stat-label">Happy Clients</div></div>
-    <div class="stat-item"><div class="stat-num">6<span>x</span></div><div class="stat-label">Award Winner</div></div>
-  </div>
-  <footer><div class="f-logo">Digital <span>Dreams</span></div><div class="f-copy">© 2026 Digital Dreams Photography. All rights reserved.</div><div class="f-links"><a onclick="showPage('gallery')">Gallery</a><a onclick="showPage('services')">Services</a><a onclick="showPage('booking')">Book</a><a onclick="showPage('contact')">Contact</a></div></footer>
-</div>
-
-<!-- GALLERY -->
-<div class="page" id="page-gallery">
-  <div class="page-hero gh"><h1 class="page-title">The <em>Gallery</em></h1></div>
-  <div class="filters">
-    <button class="filter-btn active">All Work</button>
-    <button class="filter-btn">Dreamscape</button>
-    <button class="filter-btn">Portrait</button>
-    <button class="filter-btn">Fine Art</button>
-    <button class="filter-btn">Astral</button>
-    <button class="filter-btn">Editorial</button>
-  </div>
-  <div class="masonry">
-    <div class="g-item"><div class="g-img tall" style="background:#131228;border:1px solid #2a2650;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
-          <div style="font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(200,184,240,0.35);">[ Image Placeholder ]</div>
-          <div style="font-family:Arial,sans-serif;font-size:11px;color:rgba(200,184,240,0.5);">Celestial Drift</div>
-          <div style="font-family:Arial,sans-serif;font-size:9px;color:rgba(200,184,240,0.25);">Dreamscape Series</div>
-        </div></div>
-    <div class="g-item"><div class="g-img short" style="background:#131228;border:1px solid #2a2650;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
-          <div style="font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(200,184,240,0.35);">[ Image Placeholder ]</div>
-          <div style="font-family:Arial,sans-serif;font-size:11px;color:rgba(200,184,240,0.5);">Violet Dusk</div>
-          <div style="font-family:Arial,sans-serif;font-size:9px;color:rgba(200,184,240,0.25);">Fine Art</div>
-        </div></div>
-    <div class="g-item"><div class="g-img med" style="background:#131228;border:1px solid #2a2650;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
-          <div style="font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(200,184,240,0.35);">[ Image Placeholder ]</div>
-          <div style="font-family:Arial,sans-serif;font-size:11px;color:rgba(200,184,240,0.5);">Nebula Portrait</div>
-          <div style="font-family:Arial,sans-serif;font-size:9px;color:rgba(200,184,240,0.25);">Portrait Series</div>
-        </div></div>
-    <div class="g-item"><div class="g-img med" style="background:#131228;border:1px solid #2a2650;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
-          <div style="font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(200,184,240,0.35);">[ Image Placeholder ]</div>
-          <div style="font-family:Arial,sans-serif;font-size:11px;color:rgba(200,184,240,0.5);">Astral Bloom</div>
-          <div style="font-family:Arial,sans-serif;font-size:9px;color:rgba(200,184,240,0.25);">Astral Series</div>
-        </div></div>
-    <div class="g-item"><div class="g-img short" style="background:#131228;border:1px solid #2a2650;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
-          <div style="font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(200,184,240,0.35);">[ Image Placeholder ]</div>
-          <div style="font-family:Arial,sans-serif;font-size:11px;color:rgba(200,184,240,0.5);">Midnight Reverie</div>
-          <div style="font-family:Arial,sans-serif;font-size:9px;color:rgba(200,184,240,0.25);">Editorial</div>
-        </div></div>
-    <div class="g-item"><div class="g-img tall" style="background:#131228;border:1px solid #2a2650;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
-          <div style="font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(200,184,240,0.35);">[ Image Placeholder ]</div>
-          <div style="font-family:Arial,sans-serif;font-size:11px;color:rgba(200,184,240,0.5);">Ethereal Light</div>
-          <div style="font-family:Arial,sans-serif;font-size:9px;color:rgba(200,184,240,0.25);">Fine Art</div>
-        </div></div>
-    <div class="g-item"><div class="g-img short" style="background:#131228;border:1px solid #2a2650;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
-          <div style="font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(200,184,240,0.35);">[ Image Placeholder ]</div>
-          <div style="font-family:Arial,sans-serif;font-size:11px;color:rgba(200,184,240,0.5);">Dreamfall</div>
-          <div style="font-family:Arial,sans-serif;font-size:9px;color:rgba(200,184,240,0.25);">Dreamscape Series</div>
-        </div></div>
-    <div class="g-item"><div class="g-img med" style="background:#131228;border:1px solid #2a2650;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
-          <div style="font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(200,184,240,0.35);">[ Image Placeholder ]</div>
-          <div style="font-family:Arial,sans-serif;font-size:11px;color:rgba(200,184,240,0.5);">Luminous Void</div>
-          <div style="font-family:Arial,sans-serif;font-size:9px;color:rgba(200,184,240,0.25);">Astral Series</div>
-        </div></div>
-    <div class="g-item"><div class="g-img short" style="background:#131228;border:1px solid #2a2650;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
-          <div style="font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(200,184,240,0.35);">[ Image Placeholder ]</div>
-          <div style="font-family:Arial,sans-serif;font-size:11px;color:rgba(200,184,240,0.5);">Cosmic Still</div>
-          <div style="font-family:Arial,sans-serif;font-size:9px;color:rgba(200,184,240,0.25);">Fine Art</div>
-        </div></div>
-  </div>
-  <footer><div class="f-logo">Digital <span>Dreams</span></div><div class="f-copy">© 2026 Digital Dreams Photography.</div><div class="f-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('services')">Services</a><a onclick="showPage('booking')">Book</a></div></footer>
-</div>
-
-<!-- SERVICES -->
-<div class="page" id="page-services">
-  <div class="page-hero sh"><h1 class="page-title">Session <em>Types</em></h1></div>
-  <div class="svc-grid">
-    <div class="svc-card"><div class="svc-num">01</div><div class="svc-name">Dream Portrait</div><div class="svc-desc">A two-hour studio session with our signature ethereal editing style.</div><div class="svc-price">$350</div><div class="svc-incl">What's included</div><ul class="svc-list"><li>2-hour session</li><li>20 edited digital files</li><li>Online gallery delivery</li><li>Print-ready resolution</li></ul><button class="btn-outline" onclick="showPage('booking')">Book This Session</button></div>
-    <div class="svc-card"><div class="svc-num">02</div><div class="svc-name">Fine Art Shoot</div><div class="svc-desc">A four-hour creative shoot with mood boarding and fine-art post-production.</div><div class="svc-price">$650</div><div class="svc-incl">What's included</div><ul class="svc-list"><li>4-hour session</li><li>50 edited digital files</li><li>Mood board consultation</li><li>2 print credits</li></ul><button class="btn-outline" onclick="showPage('booking')">Book This Session</button></div>
-    <div class="svc-card"><div class="svc-num">03</div><div class="svc-name">Celestial Couple</div><div class="svc-desc">An intimate two-hour session for couples with a dreamy, otherworldly aesthetic.</div><div class="svc-price">$480</div><div class="svc-incl">What's included</div><ul class="svc-list"><li>2-hour session</li><li>30 edited digital files</li><li>Location scouting</li><li>Online gallery</li></ul><button class="btn-outline" onclick="showPage('booking')">Book This Session</button></div>
-    <div class="svc-card"><div class="svc-num">04</div><div class="svc-name">Editorial Session</div><div class="svc-desc">A professionally styled shoot for brands, musicians, and artists.</div><div class="svc-price">$850</div><div class="svc-incl">What's included</div><ul class="svc-list"><li>Full day session</li><li>80 edited files</li><li>Styling consultation</li><li>Commercial use license</li></ul><button class="btn-outline" onclick="showPage('booking')">Book This Session</button></div>
-    <div class="svc-card"><div class="svc-num">05</div><div class="svc-name">Astral Experience</div><div class="svc-desc">Our signature full-day custom concept shoot built around your vision.</div><div class="svc-price">From $1,400</div><div class="svc-incl">What's included</div><ul class="svc-list"><li>Full custom concept</li><li>Full day coverage</li><li>100+ edited files</li><li>Print portfolio set</li></ul><button class="btn-outline" onclick="showPage('booking')">Inquire</button></div>
-    <div class="svc-card"><div class="svc-num">06</div><div class="svc-name">Print Fulfillment</div><div class="svc-desc">Museum-quality fine art prints on archival paper, metal, or canvas.</div><div class="svc-price">From $95</div><div class="svc-incl">Options available</div><ul class="svc-list"><li>Archival paper prints</li><li>Metal face prints</li><li>Canvas wraps</li><li>Custom framing</li></ul><button class="btn-outline" onclick="showPage('contact')">Request a Quote</button></div>
-  </div>
-  <div class="add-ons">
-    <div class="section-label">Extras</div>
-    <h3>Add-Ons</h3>
-    <div class="ao-grid">
-      <div class="ao"><div class="ao-name">Rush Delivery (48h)</div><div class="ao-price">+$120</div></div>
-      <div class="ao"><div class="ao-name">Extended Licensing</div><div class="ao-price">+$200</div></div>
-      <div class="ao"><div class="ao-name">Behind-the-Scenes Video</div><div class="ao-price">+$175</div></div>
-      <div class="ao"><div class="ao-name">Extra Retouched Selects</div><div class="ao-price">+$80</div></div>
-    </div>
-  </div>
-  <footer><div class="f-logo">Digital <span>Dreams</span></div><div class="f-copy">© 2026 Digital Dreams Photography.</div><div class="f-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('gallery')">Gallery</a><a onclick="showPage('booking')">Book</a></div></footer>
-</div>
-
-<!-- ABOUT -->
-<div class="page" id="page-about">
-  <div class="about-wrap">
-    <div class="about-img-side">
-      <div class="about-frame">
-        <div class="portrait-wrap">
-          <div style="width:140px;height:140px;border:2px dashed rgba(180,154,255,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
-            <span style="font-family:Arial,sans-serif;font-size:11px;color:rgba(200,184,240,0.4);text-align:center;line-height:1.5;">Photo<br>Coming Soon</span>
-          </div>
-          <div style="font-family:Georgia,serif;font-size:22px;color:var(--white);">Alex Rivera</div>
-          <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--lavender);">Lead Photographer</div>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo"><a href="index.html">Digital <span>Dreams</span></a></div>
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="services.html">Services</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="booking.html" class="book-btn">Book a Session</a>
         </div>
-      </div>
-    </div>
-    <div class="about-content">
-      <div class="section-label">Our Story</div>
-      <blockquote class="about-quote">"Every photo is a dream<br>you can <em>hold</em>."</blockquote>
-      <p class="about-body">Digital Dreams Photography was built around one idea: that the camera is a tool for capturing not just what is, but what feels. For over 10 years we've been creating images that blur the line between the real and the imagined.</p>
-      <p class="about-body">We work with clients who want more than a photo. They want an experience and art they can keep forever. Whether it's a solo portrait or a full editorial concept, every session starts with your vision.</p>
-      <div class="about-creds">
-        <div class="cred"><div class="cred-label">Based In</div><div class="cred-val">Portland, Oregon</div></div>
-        <div class="cred"><div class="cred-label">Experience</div><div class="cred-val">10+ Years</div></div>
-        <div class="cred"><div class="cred-label">Specialty</div><div class="cred-val">Fine Art & Dreamscape</div></div>
-        <div class="cred"><div class="cred-label">Recognition</div><div class="cred-val">6x Award Winner</div></div>
-      </div>
-    </div>
-  </div>
-  <footer><div class="f-logo">Digital <span>Dreams</span></div><div class="f-copy">© 2026 Digital Dreams Photography.</div><div class="f-links"><a onclick="showPage('gallery')">Gallery</a><a onclick="showPage('services')">Services</a><a onclick="showPage('booking')">Book</a></div></footer>
-</div>
+    </nav>
 
-<!-- BOOKING -->
-<div class="page" id="page-booking">
-  <div class="booking-wrap">
-    <div class="bk-info">
-      <div class="section-label">Reserve Your Session</div>
-      <h2 class="bk-title">Book a Session</h2>
-      <p class="bk-sub">Select a session type, choose your date, and complete the form to reserve your spot.</p>
-      <div class="sess-list">
-        <div class="sess sel"><div><div class="sess-name">Dream Portrait</div><div class="sess-desc">2 hours · 20 edited files</div></div><div class="sess-price">$350</div></div>
-        <div class="sess"><div><div class="sess-name">Fine Art Shoot</div><div class="sess-desc">4 hours · 50 edited files</div></div><div class="sess-price">$650</div></div>
-        <div class="sess"><div><div class="sess-name">Celestial Couple</div><div class="sess-desc">2 hours · 30 edited files</div></div><div class="sess-price">$480</div></div>
-        <div class="sess"><div><div class="sess-name">Editorial Session</div><div class="sess-desc">Full day · 80 edited files</div></div><div class="sess-price">$850</div></div>
-        <div class="sess"><div><div class="sess-name">Astral Experience</div><div class="sess-desc">Full day · 100+ files</div></div><div class="sess-price">From $1,400</div></div>
-      </div>
-    </div>
-    <div class="bk-form">
-      <div class="form-hdr">Complete Your Booking</div>
-      <div class="cal">
-        <div class="cal-hdr"><button class="cal-nav">‹</button><span class="cal-mo">April 2026</span><button class="cal-nav">›</button></div>
-        <div class="cal-days">
-          <div class="cdl">Su</div><div class="cdl">Mo</div><div class="cdl">Tu</div><div class="cdl">We</div><div class="cdl">Th</div><div class="cdl">Fr</div><div class="cdl">Sa</div>
-          <div class="cd"></div><div class="cd"></div><div class="cd"></div><div class="cd avail">1</div><div class="cd avail">2</div><div class="cd booked">3</div><div class="cd avail">4</div>
-          <div class="cd avail">5</div><div class="cd avail">6</div><div class="cd avail">7</div><div class="cd booked">8</div><div class="cd avail">9</div><div class="cd avail">10</div><div class="cd sel">11</div>
-          <div class="cd avail">12</div><div class="cd avail">13</div><div class="cd booked">14</div><div class="cd avail">15</div><div class="cd avail">16</div><div class="cd avail">17</div><div class="cd avail">18</div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <p class="tagline">Fine Art Photography</p>
+            <h1>Capture the<br><em>Dream</em></h1>
+            <p class="hero-desc">Photography that lives between reality and imagination — ethereal, luminous, and entirely your own.</p>
+            <div class="hero-buttons">
+                <a href="gallery.html" class="btn-main">View Portfolio</a>
+                <a href="booking.html" class="btn-outline-light">Book a Session</a>
+            </div>
         </div>
-      </div>
-      <div class="fg frow"><div><label class="fl">First Name</label><input class="fi" type="text" placeholder="Jane"></div><div><label class="fl">Last Name</label><input class="fi" type="text" placeholder="Smith"></div></div>
-      <div class="fg"><label class="fl">Email</label><input class="fi" type="email" placeholder="jane@example.com"></div>
-      <div class="fg"><label class="fl">Vision / Notes</label><input class="fi" type="text" placeholder="Tell us your idea or style reference..."></div>
-      <button class="confirm-btn" style="opacity:0.5;cursor:not-allowed;" disabled>Confirm Booking — $350 Deposit</button>
-      <div style="margin-top:10px;font-family:Arial,sans-serif;font-size:11.5px;color:rgba(200,184,240,0.5);text-align:center;">
-        <em>Payment integration coming soon — Stripe setup in progress</em>
-      </div>
-    </div>
-  </div>
-</div>
+    </section>
 
-<!-- CONTACT -->
-<div class="page" id="page-contact">
-  <div class="contact-wrap">
-    <div class="ct-info">
-      <div class="section-label">Get in Touch</div>
-      <h2 class="ct-title">Let's Create<br><em>Together</em></h2>
-      <p class="ct-sub">Have a vision you want to bring to life? We'd love to hear from you.</p>
-      <div class="ct-items">
-        <div class="ct-item"><div class="ct-icon">✉</div><div><div class="ct-lbl">Email</div><div class="ct-val">hello@digitaldreamsphoto.com</div></div></div>
-        <div class="ct-item"><div class="ct-icon">☏</div><div><div class="ct-lbl">Phone</div><div class="ct-val">(503) 555-0142</div></div></div>
-        <div class="ct-item"><div class="ct-icon">◎</div><div><div class="ct-lbl">Studio</div><div class="ct-val">Portland, Oregon</div></div></div>
-        <div class="ct-item"><div class="ct-icon">◷</div><div><div class="ct-lbl">Response Time</div><div class="ct-val">Within 24 hours, Mon–Fri</div></div></div>
-      </div>
-    </div>
-    <div class="ct-form">
-      <div class="ct-form-hdr">Send a Message</div>
-      <div class="fg frow"><div><label class="fl">First Name</label><input class="fi" type="text" placeholder="Jane"></div><div><label class="fl">Last Name</label><input class="fi" type="text" placeholder="Smith"></div></div>
-      <div class="fg"><label class="fl">Email</label><input class="fi" type="email" placeholder="jane@example.com"></div>
-      <div class="fg"><label class="fl">Subject</label><select class="fi"><option>Select a topic…</option><option>Session Inquiry</option><option>Print Purchase</option><option>Licensing</option><option>General Question</option></select></div>
-      <div class="fg"><label class="fl">Message</label><textarea class="fi" placeholder="Tell us about your project or vision…"></textarea></div>
-      <button class="submit-btn">Send Message</button>
-    </div>
-  </div>
-  <footer><div class="f-logo">Digital <span>Dreams</span></div><div class="f-copy">© 2026 Digital Dreams Photography.</div><div class="f-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('gallery')">Gallery</a><a onclick="showPage('booking')">Book</a></div></footer>
-</div>
+    <!-- Featured Work -->
+    <section class="featured">
+        <p class="section-tag">Featured Work</p>
+        <h2>Recent Collections</h2>
+        <div class="featured-grid">
+            <div class="featured-item featured-tall">
+                <img src="images/featured-1.jpg" alt="Photography session">
+            </div>
+            <div class="featured-item">
+                <img src="images/featured-2.jpg" alt="Photography session">
+            </div>
+            <div class="featured-item">
+                <img src="images/featured-3.jpg" alt="Photography session">
+            </div>
+            <div class="featured-item">
+                <img src="images/featured-4.jpg" alt="Photography session">
+            </div>
+            <div class="featured-item">
+                <img src="images/featured-5.jpg" alt="Photography session">
+            </div>
+        </div>
+    </section>
 
-<script>
-function showPage(n){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
-  document.getElementById('page-'+n).classList.add('active');
-  var el=document.getElementById('nav-'+n);
-  if(el)el.classList.add('active');
-  window.scrollTo(0,0);
-}
-document.querySelectorAll('.filter-btn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');}));
-document.querySelectorAll('.sess').forEach(s=>s.addEventListener('click',()=>{document.querySelectorAll('.sess').forEach(x=>x.classList.remove('sel'));s.classList.add('sel');}));
-</script>
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">5</div>
+            <div class="stat-label">Session Types</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">300+</div>
+            <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">6x</div>
+            <div class="stat-label">Award Winner</div>
+        </div>
+    </div>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <p class="section-tag">Client Stories</p>
+        <h2>What Our Clients Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial">
+                <p>"Working with Digital Dreams was unlike anything I had experienced. The photos felt like stepping into another world. I will treasure them forever."</p>
+                <strong>Sarah M.</strong>
+                <span>Portrait Session</span>
+            </div>
+            <div class="testimonial">
+                <p>"I booked the Fine Art Shoot for my band's press photos and the results were incredible. Exactly what we were looking for."</p>
+                <strong>Marcus T.</strong>
+                <span>Fine Art Session</span>
+            </div>
+            <div class="testimonial">
+                <p>"Our couples session was magical. The editing, the atmosphere, the attention to detail — everything was perfect. Highly recommend."</p>
+                <strong>Priya & Daniel K.</strong>
+                <span>Couples Session</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo"><a href="index.html">Digital <span>Dreams</span></a></div>
+        <p>© 2026 Digital Dreams Photography. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="gallery.html">Gallery</a>
+            <a href="services.html">Services</a>
+            <a href="booking.html">Book</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
 </body>
 </html>
